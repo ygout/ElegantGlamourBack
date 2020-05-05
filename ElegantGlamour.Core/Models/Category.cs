@@ -1,4 +1,4 @@
-namespace ElegantGlamour.API.Models
+namespace ElegantGlamour.Core.Models
 {
     public class Category
     {

@@ -1,5 +1,6 @@
-namespace ElegantGlamour.API.Models
+namespace ElegantGlamour.Core.Models
 {
+   
     public class ServiceResponse<T>
     {
         public T Data { get; set; }
