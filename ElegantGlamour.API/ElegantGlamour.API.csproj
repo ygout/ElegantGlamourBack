@@ -1,16 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ElegantGlamour.Core\ElegantGlamour.Core.csproj" />
-    <ProjectReference Include="..\ElegantGlamour.Services\ElegantGlamour.Services.csproj" />
-    <ProjectReference Include="..\ElegantGlamour.Data\ElegantGlamour.Data.csproj" />
+      <ProjectReference Include="..\ElegantGlamour.Core\ElegantGlamour.Core.csproj" />
+      <ProjectReference Include="..\ElegantGlamour.Services\ElegantGlamour.Services.csproj" />
+      <ProjectReference Include="..\ElegantGlamour.Data\ElegantGlamour.Data.csproj" />
   </ItemGroup>
 </Project>

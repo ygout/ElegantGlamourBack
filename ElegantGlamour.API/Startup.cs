@@ -2,20 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using ElegantGlamour.API.Data;
-using ElegantGlamour.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ElegantGlamour.Core;
+using ElegantGlamour.Data;
+using ElegantGlamour.Services;
+using ElegantGlamour.Core.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
-namespace ElegantGlamour.API
+namespace ElegantGlamour.Api
 {
     public class Startup
     {
@@ -29,15 +31,19 @@ namespace ElegantGlamour.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options =>
-            options.UseMySql(Configuration.GetConnectionString("DefaultConnection"))
-            );
             services.AddControllers();
-            services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IPrestationService, PrestationService>();
-            services.AddScoped<ICategoryService, CategoryService>();
 
+            services.AddDbContext<ElegantGlamourDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ElegantGlamour.Data"))
+            );
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ICategoryService, CategoryService>();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Elegant & Glamour API", Version = "v1" });
+            });
+            // services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +54,7 @@ namespace ElegantGlamour.API
                 app.UseDeveloperExceptionPage();
             }
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -57,6 +63,13 @@ namespace ElegantGlamour.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Elegant & Glamour API V1");
             });
         }
     }

@@ -10,6 +10,6 @@ namespace ElegantGlamour.Core.Services
         Task<Category> GetCategoryById(int id);
         Task<Category> CreateCategory(Category newCategory);
         Task UpdatePrestation(Category categoryToBeUpdate);
-        Task DeletePrestation(Category category);
+        Task DeletePrestation(int id);
     }
 }

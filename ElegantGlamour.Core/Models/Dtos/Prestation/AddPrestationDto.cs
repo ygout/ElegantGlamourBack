@@ -1,8 +1,7 @@
-namespace ElegantGlamour.API.Dtos
+namespace ElegantGlamour.Core.Models
 {
-    public class UpdatePrestationDto
+    public class AddPrestationDto
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }

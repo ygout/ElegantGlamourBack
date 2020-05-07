@@ -1,4 +1,4 @@
-namespace ElegantGlamour.API.Dtos
+namespace ElegantGlamour.Core.Models
 {
     public class AddCategoryDto
     {

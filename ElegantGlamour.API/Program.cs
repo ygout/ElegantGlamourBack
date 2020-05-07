@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ElegantGlamour.API
+namespace ElegantGlamour.Api
 {
     public class Program
     {
