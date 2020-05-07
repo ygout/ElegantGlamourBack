@@ -16,6 +16,7 @@ using ElegantGlamour.Services;
 using ElegantGlamour.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using AutoMapper; 
 
 namespace ElegantGlamour.Api
 {
@@ -43,7 +44,8 @@ namespace ElegantGlamour.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Elegant & Glamour API", Version = "v1" });
             });
-            // services.AddAutoMapper(typeof(Startup));
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -33,9 +33,9 @@ namespace ElegantGlamour.Services
             return await _unitOfWork.Categories.GetAllAsync();
         }
 
-        public Task<Category> GetCategoryById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
-            throw new System.NotImplementedException();
+            return await _unitOfWork.Categories.GetByIdAsync(id);
         }
 
         public Task UpdatePrestation(Category categoryToBeUpdate)
