@@ -17,6 +17,7 @@ using ElegantGlamour.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using AutoMapper; 
+using AutoWrapper;
 
 namespace ElegantGlamour.Api
 {
@@ -57,7 +58,12 @@ namespace ElegantGlamour.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseApiResponseAndExceptionWrapper(
+                new AutoWrapperOptions{
+                    IsApiOnly = false,
+                    IsDebug = true
+                }
+            );
             app.UseRouting();
 
             app.UseAuthorization();

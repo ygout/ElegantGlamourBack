@@ -23,9 +23,11 @@ namespace ElegantGlamour.Services
             return newCategory;
         }
 
-        public Task DeletePrestation(int id)
+        public async Task DeleteCategory(Category category)
         {
-            throw new System.NotImplementedException();
+            _unitOfWork.Categories.Remove(category);
+
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task<IEnumerable<Category>> GetAllCategories()
@@ -38,9 +40,11 @@ namespace ElegantGlamour.Services
             return await _unitOfWork.Categories.GetByIdAsync(id);
         }
 
-        public Task UpdatePrestation(Category categoryToBeUpdate)
+        public async Task UpdateCategory(Category categoryToBeUpdated, Category category)
         {
-            throw new System.NotImplementedException();
+            categoryToBeUpdated.Title = category.Title;
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }

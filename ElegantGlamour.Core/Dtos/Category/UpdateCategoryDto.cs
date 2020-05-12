@@ -1,4 +1,4 @@
-namespace ElegantGlamour.Core.Models
+namespace ElegantGlamour.Core.Dtos
 {
     public class UpdateCategoryDto
     {

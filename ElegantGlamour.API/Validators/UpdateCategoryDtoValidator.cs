@@ -1,11 +1,11 @@
-using FluentValidation;
 using ElegantGlamour.Core.Dtos;
+using FluentValidation;
 
 namespace ElegantGlamour.Api.Validators
 {
-    public class AddCategoryDtoValidator : AbstractValidator<AddCategoryDto>
+    public class UpdateCategoryDtoValidator : AbstractValidator<UpdateCategoryDto>
     {
-        public AddCategoryDtoValidator()
+        public UpdateCategoryDtoValidator()
         {
             RuleFor(c => c.Title)
                 .NotEmpty()

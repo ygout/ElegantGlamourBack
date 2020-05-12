@@ -9,7 +9,7 @@ namespace ElegantGlamour.Core.Services
         Task<IEnumerable<Prestation>> GetAllPrestations();
         Task<Prestation> GetPrestationById(int id);
         Task<Prestation> CreatePrestation(Prestation newPrestation);
-        Task UpdatePrestation(Prestation prestationToBeUpdate);
+        Task UpdatePrestation(Prestation prestationToBeUpdate, Prestation prestation);
         Task DeletePrestation(Prestation prestation);
     }
 }

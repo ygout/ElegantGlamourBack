@@ -1,5 +1,6 @@
 using AutoMapper;
 using ElegantGlamour.Core.Models;
+using ElegantGlamour.Core.Dtos;
 
 namespace ElegantGlamour.Api.Mapping
 {

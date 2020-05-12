@@ -39,9 +39,15 @@ namespace ElegantGlamour.Services
             return await _unitOfWork.Prestations.GetByIdAsync(id);
         }
 
-        public Task UpdatePrestation(Prestation prestationToBeUpdate)
+        public async Task UpdatePrestation(Prestation prestationToBeUpdate, Prestation prestation)
         {
-            throw new System.NotImplementedException();
+            prestationToBeUpdate.Description = prestation.Description;
+            prestationToBeUpdate.Duration = prestation.Duration;
+            prestationToBeUpdate.Price = prestation.Price;
+            prestationToBeUpdate.Title = prestation.Title;
+            prestationToBeUpdate.Category = prestation.Category;
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }
