@@ -10,10 +10,14 @@ namespace ElegantGlamour.Api.Mapping
         {
             // Entity to Dto
             CreateMap<Category, GetCategoryDto>();
+            CreateMap<Prestation, GetPrestationDto>();
 
             // Dto to Entity
             CreateMap<AddCategoryDto, Category>();
             CreateMap<UpdateCategoryDto, Category>();
+            
+            CreateMap<AddPrestationDto, Prestation>();
+            CreateMap<UpdatePrestationDto, Prestation>();
 
         }
     }

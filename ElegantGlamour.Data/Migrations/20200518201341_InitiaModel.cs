@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ElegantGlamour.Data.Migrations
 {
-    public partial class InitialModel : Migration
+    public partial class InitiaModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace ElegantGlamour.Data.Migrations
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Duration = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: false),
                     Price = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
@@ -40,7 +40,7 @@ namespace ElegantGlamour.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

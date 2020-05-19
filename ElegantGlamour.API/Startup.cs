@@ -40,6 +40,7 @@ namespace ElegantGlamour.Api
             );
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IPrestationService, PrestationService>();
 
             services.AddSwaggerGen(c =>
             {
