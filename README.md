@@ -5,6 +5,26 @@
 
 # Architecture
 
+Layer architecture:
+  * API (Start up project)
+    * Point of access for our application
+    * dto or ressources api
+    * Validation with Fluent
+    * AutoWrapper
+    * AutoMapper
+  * Core
+    * Application foundation
+    * Contracts => interface
+    * Models
+    * everything else that is essential
+  * Data
+    * Access layer
+    * Repository Pattern
+  * Services
+    * Business logic (link between Api and Data)
+  * Web (Angular Admin pannel)
+    * Admin pannel for adminstration of our website
+
 # Lib
  * Entity Framework core for persistence
  * AutoMapper for mapping models into Dto Api
