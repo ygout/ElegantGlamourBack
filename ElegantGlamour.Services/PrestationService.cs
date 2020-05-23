@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElegantGlamour.Core;
@@ -16,6 +17,9 @@ namespace ElegantGlamour.Services
         }
         public async Task<Prestation> CreatePrestation(Prestation newPrestation)
         {
+            bool isCategoryExist = await _unitOfWork.Categories.IsCategoryIdExist(newPrestation.CategoryId);
+            if(!isCategoryExist)
+                throw new Exception("La categorie n'existe pas");
             await _unitOfWork.Prestations.AddAsync(newPrestation);
             await _unitOfWork.CommitAsync();
             

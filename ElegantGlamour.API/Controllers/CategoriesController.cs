@@ -105,7 +105,7 @@ namespace ElegantGlamour.Api.Controllers
                 var validationResult = await validator.ValidateAsync(updateCategoryDto);
 
                 if (id == 0 || !validationResult.IsValid)
-                    return BadRequest(validationResult.Errors);
+                     throw new ApiException(validationResult.Errors);
 
                 var categoryToBeUpdate = await _categoryService.GetCategoryById(id);
 

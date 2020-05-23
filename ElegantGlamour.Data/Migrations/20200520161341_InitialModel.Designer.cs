@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ElegantGlamour.Data.Migrations
 {
     [DbContext(typeof(ElegantGlamourDbContext))]
-    [Migration("20200518201341_InitiaModel")]
-    partial class InitiaModel
+    [Migration("20200520161341_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

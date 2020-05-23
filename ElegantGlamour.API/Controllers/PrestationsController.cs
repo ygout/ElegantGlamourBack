@@ -52,5 +52,74 @@ namespace ElegantGlamour.API.Controllers
                 throw;
             }
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<GetPrestationDto>> UpdatePrestation(int id, [FromBody] UpdatePrestationDto updatePrestationDto)
+        {
+            var validator = new UpdatePrestationDtoValidator();
+            try
+            {
+                var validationResult = await validator.ValidateAsync(updatePrestationDto);
+
+                if (id == 0 || !validationResult.IsValid)
+                    throw new ApiException(validationResult.Errors);
+
+                var prestationToBeUpdate = await _prestationService.GetPrestationById(id);
+
+                if (prestationToBeUpdate == null)
+                    return NotFound();
+
+                var prestation = _mapper.Map<UpdatePrestationDto, Prestation>(updatePrestationDto);
+                await _prestationService.UpdatePrestation(prestationToBeUpdate, prestation);
+
+                var updatedPrestation = await _prestationService.GetPrestationById(id);
+
+                var updatedPrestationDto = _mapper.Map<Prestation, GetPrestationDto>(updatedPrestation);
+
+                return Ok(updatedPrestation);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                throw;
+            }
+        }
+        [HttpGet("")]
+        public async Task<ActionResult<IEnumerable<GetPrestationDto>>> GetPrestations()
+        {
+            try
+            {
+                IEnumerable<Prestation> prestations = await this._prestationService.GetAllPrestations();
+                IEnumerable<GetPrestationDto> prestationsDtos = this._mapper.Map<IEnumerable<Prestation>, IEnumerable<GetPrestationDto>>(prestations);
+
+                return Ok(prestationsDtos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                throw;
+            }
+
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetPrestationDto>> GetPrestationById(int id)
+        {
+            try
+            {
+                var prestation = await this._prestationService.GetPrestationById(id);
+                var prestationDto = this._mapper.Map<Prestation, GetPrestationDto>(prestation);
+
+                if (prestationDto == null)
+                    return NotFound();
+
+                return Ok(prestationDto);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                throw;
+            }
+        }
     }
 }

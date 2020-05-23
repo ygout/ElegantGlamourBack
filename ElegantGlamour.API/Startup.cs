@@ -59,12 +59,14 @@ namespace ElegantGlamour.Api
             }
 
             app.UseHttpsRedirection();
+
             app.UseApiResponseAndExceptionWrapper(
                 new AutoWrapperOptions{
                     IsApiOnly = false,
                     IsDebug = true
                 }
             );
+            
             app.UseRouting();
 
             app.UseAuthorization();
