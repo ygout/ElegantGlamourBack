@@ -42,7 +42,7 @@ namespace ElegantGlamour.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
 
@@ -63,7 +63,7 @@ namespace ElegantGlamour.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
         }
@@ -91,7 +91,7 @@ namespace ElegantGlamour.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
         }
@@ -123,14 +123,13 @@ namespace ElegantGlamour.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse>> DeleteCategory(int id)
         {
-            var response = new Response();
             try
             {
                 var categoryToBeDeleted = await _categoryService.GetCategoryById(id);
@@ -140,11 +139,11 @@ namespace ElegantGlamour.Api.Controllers
 
                 await _categoryService.DeleteCategory(categoryToBeDeleted);
 
-                return new ApiResponse("Category has been deleted in the database.", id, 200);
+                return new ApiResponse("Category has been deleted", id, 200);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
 

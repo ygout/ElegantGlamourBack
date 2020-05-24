@@ -48,7 +48,7 @@ namespace ElegantGlamour.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
         }
@@ -80,7 +80,7 @@ namespace ElegantGlamour.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
         }
@@ -96,7 +96,7 @@ namespace ElegantGlamour.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
 
@@ -117,7 +117,27 @@ namespace ElegantGlamour.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+                throw;
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ApiResponse>> DeletePrestation(int id)
+        {
+            try
+            {
+                var prestationToBeDeleted = await _prestationService.GetPrestationById(id);
+
+                if(prestationToBeDeleted == null)
+                    return NotFound();
+
+                await _prestationService.DeletePrestation(prestationToBeDeleted);
+
+                return new ApiResponse("Prestation has been deleted ", id, 200);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
                 throw;
             }
         }
