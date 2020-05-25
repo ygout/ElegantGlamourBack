@@ -10,48 +10,95 @@ namespace ElegantGlamour.Services
     public class PrestationService : IPrestationService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PrestationService(IUnitOfWork unitOfWork)
+        private readonly ICategoryService _categoryService;
+        public PrestationService(IUnitOfWork unitOfWork, ICategoryService categoryService)
         {
+            this._categoryService = categoryService;
             this._unitOfWork = unitOfWork;
 
         }
+
         public async Task<Prestation> CreatePrestation(Prestation newPrestation)
         {
-            bool isCategoryExist = await _unitOfWork.Categories.IsCategoryIdExist(newPrestation.CategoryId);
-            if(!isCategoryExist)
-                throw new Exception("La categorie n'existe pas");
-            await _unitOfWork.Prestations.AddAsync(newPrestation);
-            await _unitOfWork.CommitAsync();
-            
-            return newPrestation;
+            try
+            {
+                bool isCategoryExist = await _categoryService.IsCategoryIdExist(newPrestation.CategoryId);
+                if (!isCategoryExist)
+                    throw new Exception("La categorie n'existe pas");
+                await _unitOfWork.Prestations.AddAsync(newPrestation);
+                await _unitOfWork.CommitAsync();
+
+                return newPrestation;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public async Task DeletePrestation(Prestation prestation)
         {
-            _unitOfWork.Prestations.Remove(prestation);
+            try
+            {
+                _unitOfWork.Prestations.Remove(prestation);
 
-            await _unitOfWork.CommitAsync();
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<IEnumerable<Prestation>> GetAllPrestations()
         {
-            return await _unitOfWork.Prestations.GetAllAsync();
+            try
+            {
+                return await _unitOfWork.Prestations.GetAllPrestationsWithCategoryAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<Prestation> GetPrestationById(int id)
         {
-            return await _unitOfWork.Prestations.GetByIdAsync(id);
+            try
+            {
+                return await _unitOfWork.Prestations.GetPrestationWithCategoryByIdAsync(id);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdatePrestation(Prestation prestationToBeUpdate, Prestation prestation)
         {
-            prestationToBeUpdate.Description = prestation.Description;
-            prestationToBeUpdate.Duration = prestation.Duration;
-            prestationToBeUpdate.Price = prestation.Price;
-            prestationToBeUpdate.Title = prestation.Title;
-            prestationToBeUpdate.Category = prestation.Category;
+            try
+            {
+                prestationToBeUpdate.Description = prestation.Description;
+                prestationToBeUpdate.Duration = prestation.Duration;
+                prestationToBeUpdate.Price = prestation.Price;
+                prestationToBeUpdate.Title = prestation.Title;
 
-            await _unitOfWork.CommitAsync();
+                bool isCategoryExist = await _categoryService.IsCategoryIdExist(prestation.CategoryId);
+                if (!isCategoryExist)
+                    throw new Exception("La categorie n'existe pas");
+
+                prestationToBeUpdate.Category = prestation.Category;
+
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

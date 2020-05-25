@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using ElegantGlamour.Api.Responses;
 using ElegantGlamour.Api.Validators;
 using ElegantGlamour.Core.Dtos;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
 using Microsoft.AspNetCore.Mvc;
-using ElegantGlamour.Api.Extensions;
 using System;
 using Microsoft.Extensions.Logging;
 using System.Reflection;

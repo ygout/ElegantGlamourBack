@@ -11,5 +11,6 @@ namespace ElegantGlamour.Core.Services
         Task<Category> CreateCategory(Category newCategory);
         Task UpdateCategory(Category categoryTpBeUpdated, Category category);
         Task DeleteCategory(Category category);
+        Task<bool> IsCategoryIdExist(int id);
     }
 }

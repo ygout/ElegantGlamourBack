@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElegantGlamour.Core;
+using System;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
 
@@ -17,34 +18,84 @@ namespace ElegantGlamour.Services
 
         public async Task<Category> CreateCategory(Category newCategory)
         {
-            await _unitOfWork.Categories.AddAsync(newCategory);
-            await _unitOfWork.CommitAsync();
+            try
+            {
+                await _unitOfWork.Categories.AddAsync(newCategory);
+                await _unitOfWork.CommitAsync();
 
-            return newCategory;
+                return newCategory;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task DeleteCategory(Category category)
         {
-            _unitOfWork.Categories.Remove(category);
+            try
+            {
+                _unitOfWork.Categories.Remove(category);
 
-            await _unitOfWork.CommitAsync();
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public async Task<IEnumerable<Category>> GetAllCategories()
         {
-            return await _unitOfWork.Categories.GetAllAsync();
+            try
+            {
+                return await _unitOfWork.Categories.GetAllAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<Category> GetCategoryById(int id)
         {
-            return await _unitOfWork.Categories.GetByIdAsync(id);
+            try
+            {
+                return await _unitOfWork.Categories.GetByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateCategory(Category categoryToBeUpdated, Category category)
         {
-            categoryToBeUpdated.Title = category.Title;
+            try
+            {
+                categoryToBeUpdated.Title = category.Title;
 
-            await _unitOfWork.CommitAsync();
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> IsCategoryIdExist(int id)
+        {
+            try
+            {
+                return await _unitOfWork.Categories.IsCategoryIdExist(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

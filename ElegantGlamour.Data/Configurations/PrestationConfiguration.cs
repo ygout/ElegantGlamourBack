@@ -8,7 +8,18 @@ namespace ElegantGlamour.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Prestation> builder)
         {
-            throw new System.NotImplementedException();
+            builder.HasKey(p => p.Id);
+
+            builder.Property(p => p.Id).UseMySqlIdentityColumn();
+
+            builder.Property(p => p.Title).IsRequired().HasMaxLength(50);
+
+            builder
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Prestations)
+                .HasForeignKey(p => p.CategoryId);
+                
+            builder.ToTable("Prestations");
         }
     }
 }
