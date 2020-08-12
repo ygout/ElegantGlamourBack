@@ -20,6 +20,8 @@ namespace ElegantGlamour.Services
         {
             try
             {
+                if (await _unitOfWork.Categories.IsCategoryTitleExist(newCategory.Title))
+                    throw new Exception("Category title already exist"); // custom exception
                 await _unitOfWork.Categories.AddAsync(newCategory);
                 await _unitOfWork.CommitAsync();
 
@@ -93,6 +95,17 @@ namespace ElegantGlamour.Services
                 return await _unitOfWork.Categories.IsCategoryIdExist(id);
             }
             catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<bool>IsCategoryTitleExist(string title)
+        {
+            try
+            {
+                return await _unitOfWork.Categories.IsCategoryTitleExist(title);
+
+            } catch (Exception)
             {
                 throw;
             }

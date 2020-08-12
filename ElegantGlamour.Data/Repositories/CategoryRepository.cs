@@ -28,5 +28,16 @@ namespace ElegantGlamour.Data.Repositories
 
             return isExist;
         }
+
+        public async Task<bool> IsCategoryTitleExist(string title)
+        {
+            var isExist = false;
+            var category = await ElegantGlamourDbContext.Categories.SingleOrDefaultAsync(c => c.Title == title);
+
+            if (category != null)
+                isExist = true;
+
+            return isExist;
+        }
     }
 }

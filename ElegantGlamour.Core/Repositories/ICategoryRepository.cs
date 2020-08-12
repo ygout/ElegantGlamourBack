@@ -6,6 +6,7 @@ namespace ElegantGlamour.Core.Repositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-         Task<Boolean> IsCategoryIdExist(int id);
+        Task<bool> IsCategoryIdExist(int id);
+        Task<bool> IsCategoryTitleExist(string title);
     }
 }

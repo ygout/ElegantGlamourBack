@@ -63,7 +63,8 @@ namespace ElegantGlamour.Api
             app.UseApiResponseAndExceptionWrapper(
                 new AutoWrapperOptions{
                     IsApiOnly = false,
-                    IsDebug = true
+                    IsDebug = true,
+                    ShowStatusCode = true
                 }
             );
             
