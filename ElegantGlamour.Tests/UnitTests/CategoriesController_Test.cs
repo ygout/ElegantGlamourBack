@@ -16,6 +16,7 @@ using AutoWrapper.Wrappers;
 using ElegantGlamour.Api.Mapping;
 using ElegantGlamour.Core.Dtos;
 using System.Threading.Tasks;
+using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.Tests.UnitTests
 {
@@ -187,8 +188,258 @@ namespace ElegantGlamour.Tests.UnitTests
             #region Assert
 
             Assert.Equal(400, apiException.StatusCode);
-
+            Assert.Contains(ErrorMessage.Err_Category_Not_Empty, apiException.CustomError.ToString());
             #endregion
         }
+        /// <summary>
+        /// Test the CreateCategory method response Erreur 50 length Max
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_RETURN_ERROR_MAX_LENGTH()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            var addCategory = new AddCategoryDto() { Title = "TitreDuneCategorieAvecPlusde50caractereouicestbeacoutroplongjenesaistoujourspasquoimettreestonaplusde50caractere???"};
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreateCategory(addCategory));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Category_Max_Size, apiException.CustomError.ToString());
+            #endregion
+        }
+
+        /// <summary>
+        /// Test the CreateCategory method response Erreur 50 length Max
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_RETURN_ERROR_ALREADY_EXIST()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            var addCategory = new AddCategoryDto() { Title = "Maquillage" };
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreateCategory(addCategory));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Category_Already_Exist, apiException.CustomError.ToString());
+            #endregion
+        }
+
+        /// <summary>
+        /// Test the UpdateCategory not found
+        /// </summary>
+        [Fact]
+        public async Task PUT_UPDATE_CATEGORY_ERROR_NOT_FOUND()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            int idCategory = 50;
+            var updateCategory = new UpdateCategoryDto() { Title = "Maquillage modifié" };
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiProblemDetailsException>(() => controller.UpdateCategory(idCategory, updateCategory));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(404, apiException.StatusCode);
+            #endregion
+        }
+
+        /// <summary>
+        /// Test the UpdateCategory method response Erreur not empty
+        /// </summary>
+        [Fact]
+        public async Task PUT_UPDATE_CATEGORY_RETURN_ERROR_NOT_EMPTY()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            var updateCategory = new UpdateCategoryDto();
+            int idCategory = 1;
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.UpdateCategory(idCategory, updateCategory));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Category_Not_Empty, apiException.CustomError.ToString());
+            #endregion
+        }
+
+        /// <summary>
+        /// Test the UpdateCategory method response Erreur 50 length Max
+        /// </summary>
+        [Fact]
+        public async Task PUT_UPDATE_CATEGORY_RETURN_ERROR_MAX_LENGTH()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            var updateCategory = new UpdateCategoryDto() { Title = "TitreDuneCategorieAvecPlusde50caractereouicestbeacoutroplongjenesaistoujourspasquoimettreestonaplusde50caractere???" };
+            int idCategory = 1;
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.UpdateCategory(idCategory, updateCategory));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Category_Max_Size, apiException.CustomError.ToString());
+            #endregion
+        }
+
+        /// <summary>
+        /// Test the UpdateCategory method response Erreur 50 length Max
+        /// </summary>
+        [Fact]
+        public async Task PUT_UPDATE_CATEGORY_RETURN_ERROR_ALREADY_EXIST()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            var updateCategory = new UpdateCategoryDto() { Title = "Maquillage" };
+            int idCategory = 1;
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.UpdateCategory(idCategory, updateCategory));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Category_Already_Exist, apiException.CustomError.ToString());
+            #endregion
+        }
+
+        /// <summary>
+        /// Test the Update Category method response OK
+        /// </summary>
+        [Fact]
+        public async Task PUT_UPDATE_CATEGORY_RETURNS_OK()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            var updateCategory = new UpdateCategoryDto()
+            {
+                Title = "TEST_CATEGORY_UPDATE",
+            };
+            int idCategory = 1;
+            #region Act
+            var response = await controller.UpdateCategory(idCategory, updateCategory);
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.IsType<ApiResponse>(response);
+            Assert.Equal(201, response.StatusCode);
+            #endregion
+        }
+
     }
 }

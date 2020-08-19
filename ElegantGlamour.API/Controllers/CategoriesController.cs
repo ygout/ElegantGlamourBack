@@ -13,6 +13,7 @@ using AutoWrapper.Wrappers;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
+using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.Api.Controllers
 {
@@ -88,7 +89,15 @@ namespace ElegantGlamour.Api.Controllers
 
                 var getCategoryDto = _mapper.Map<Category, GetCategoryDto>(categoryCreated);
 
-                return new ApiResponse("Record successfully created.", getCategoryDto, Status201Created);
+                return new ApiResponse("La catégorie a été correctement crée", getCategoryDto, Status201Created);
+            }
+            catch (CategoryAlreadyExistException ex)
+            {
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+
+                var apiException = new ApiException(ex.Message, Status400BadRequest);
+                apiException.CustomError = ex.Message;
+                throw apiException;
             }
             catch (Exception ex)
             {
@@ -105,13 +114,13 @@ namespace ElegantGlamour.Api.Controllers
             {
                 var validationResult = await validator.ValidateAsync(updateCategoryDto);
 
-                if (id == 0 || !validationResult.IsValid)
-                     throw new ApiException(validationResult.Errors);
+                if (!validationResult.IsValid)
+                    throw new ApiException(validationResult);
 
                 var categoryToBeUpdate = await _categoryService.GetCategoryById(id);
 
-                if (categoryToBeUpdate == null)
-                    throw new ApiProblemDetailsException(Status404NotFound);
+                if (id == 0 || categoryToBeUpdate == null)
+                    throw new ApiProblemDetailsException("La catégorie n'existe pas", Status404NotFound);
 
                 var category = _mapper.Map<UpdateCategoryDto, Category>(updateCategoryDto);
 
@@ -120,7 +129,15 @@ namespace ElegantGlamour.Api.Controllers
                 var updatedCategory = await _categoryService.GetCategoryById(id);
                 var updatedCategoryDto = _mapper.Map<Category, GetCategoryDto>(updatedCategory);
 
-                return new ApiResponse($"Record with Id: {id} sucessfully updated.", updatedCategoryDto);
+                return new ApiResponse($"La catégorie avec pour id: {id} a été correctement modifié", updatedCategoryDto, Status201Created);
+            }
+            catch (CategoryAlreadyExistException ex)
+            {
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+
+                var apiException = new ApiException(ex.Message, Status400BadRequest);
+                apiException.CustomError = ex.Message;
+                throw apiException;
             }
             catch (Exception ex)
             {
@@ -140,7 +157,7 @@ namespace ElegantGlamour.Api.Controllers
 
                 await _categoryService.DeleteCategory(categoryToBeDeleted);
 
-                return new ApiResponse($"Record with Id: {id} sucessfully deleted.", true);
+                return new ApiResponse($"La catégorie avec pour id: {id} a été correctement supprimé.", true);
             }
             catch (Exception ex)
             {
@@ -148,7 +165,7 @@ namespace ElegantGlamour.Api.Controllers
                 throw;
             }
 
-  
+
         }
     }
 }

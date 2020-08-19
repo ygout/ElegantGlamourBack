@@ -1,5 +1,6 @@
 using FluentValidation;
 using ElegantGlamour.Core.Dtos;
+using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.Api.Validators
 {
@@ -8,8 +9,8 @@ namespace ElegantGlamour.Api.Validators
         public AddCategoryDtoValidator()
         {
             RuleFor(c => c.Title)
-                .NotEmpty()
-                .MaximumLength(50);
+                .NotEmpty().WithMessage(ErrorMessage.Err_Category_Not_Empty)
+                .MaximumLength(50).WithMessage(ErrorMessage.Err_Category_Max_Size);
         }
     }
 }

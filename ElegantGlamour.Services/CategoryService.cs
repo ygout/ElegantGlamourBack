@@ -4,6 +4,7 @@ using ElegantGlamour.Core;
 using System;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
+using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.Services
 {
@@ -21,7 +22,7 @@ namespace ElegantGlamour.Services
             try
             {
                 if (await _unitOfWork.Categories.IsCategoryTitleExist(newCategory.Title))
-                    throw new Exception("Category title already exist"); // custom exception
+                    throw new CategoryAlreadyExistException(); // custom exception
                 await _unitOfWork.Categories.AddAsync(newCategory);
                 await _unitOfWork.CommitAsync();
 
@@ -78,6 +79,8 @@ namespace ElegantGlamour.Services
         {
             try
             {
+                if (await _unitOfWork.Categories.IsCategoryTitleExist(category.Title))
+                    throw new CategoryAlreadyExistException(); // custom exception
                 categoryToBeUpdated.Title = category.Title;
 
                 await _unitOfWork.CommitAsync();
