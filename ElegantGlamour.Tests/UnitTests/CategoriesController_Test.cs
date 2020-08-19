@@ -81,7 +81,7 @@ namespace ElegantGlamour.Tests.UnitTests
             #endregion
 
             #region Act
-            var apiException = await Assert.ThrowsAsync<ApiProblemDetailsException>(() => controller.GetCategoryById(id));
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.GetCategoryById(id));
             dbContext.Dispose();
             #endregion
 
@@ -285,7 +285,7 @@ namespace ElegantGlamour.Tests.UnitTests
             int idCategory = 50;
             var updateCategory = new UpdateCategoryDto() { Title = "Maquillage modifié" };
             #region Act
-            var apiException = await Assert.ThrowsAsync<ApiProblemDetailsException>(() => controller.UpdateCategory(idCategory, updateCategory));
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.UpdateCategory(idCategory, updateCategory));
 
             dbContext.Dispose();
             #endregion
@@ -438,6 +438,73 @@ namespace ElegantGlamour.Tests.UnitTests
             #region Assert
             Assert.IsType<ApiResponse>(response);
             Assert.Equal(201, response.StatusCode);
+            #endregion
+        }
+
+        /// <summary>
+        /// Test the delete Category method response OK
+        /// </summary>
+        [Fact]
+        public async Task DELETE_CATEGORY_RETURNS_OK()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            int idCategory = 1;
+            #region Act
+            var response = await controller.DeleteCategory(idCategory);
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.IsType<ApiResponse>(response);
+            Assert.Equal(200, response.StatusCode);
+            #endregion
+        }
+        
+        /// <summary>
+        /// Test the delete Category method with unknown id return not found
+        /// </summary>
+        [Fact]
+        public async Task DELETE_CATEGORY_RETURNS_NOT_FOUND()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+
+            var mockLogger = Mock.Of<ILogger<CategoriesController>>();
+
+            var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
+            #endregion
+            int idCategory = 75;
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.DeleteCategory(idCategory));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(404, apiException.StatusCode);
             #endregion
         }
 

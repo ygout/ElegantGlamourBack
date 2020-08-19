@@ -58,7 +58,7 @@ namespace ElegantGlamour.Api.Controllers
                 var category = await this._categoryService.GetCategoryById(id);
                 var categoryDto = this._mapper.Map<Category, GetCategoryDto>(category);
                 if (categoryDto == null)
-                    throw new ApiProblemDetailsException($"Record with id: {id} does not exist.", Status404NotFound);
+                    throw new ApiException($"Record with id: {id} does not exist.", Status404NotFound);
 
                 return categoryDto;
             }
@@ -120,7 +120,7 @@ namespace ElegantGlamour.Api.Controllers
                 var categoryToBeUpdate = await _categoryService.GetCategoryById(id);
 
                 if (id == 0 || categoryToBeUpdate == null)
-                    throw new ApiProblemDetailsException("La catégorie n'existe pas", Status404NotFound);
+                    throw new ApiException("La catégorie n'existe pas", Status404NotFound);
 
                 var category = _mapper.Map<UpdateCategoryDto, Category>(updateCategoryDto);
 
@@ -153,7 +153,7 @@ namespace ElegantGlamour.Api.Controllers
                 var categoryToBeDeleted = await _categoryService.GetCategoryById(id);
 
                 if (categoryToBeDeleted == null)
-                    throw new ApiProblemDetailsException(Status404NotFound);
+                    throw new ApiException("La catégorie n'existe pas", Status404NotFound);
 
                 await _categoryService.DeleteCategory(categoryToBeDeleted);
 
