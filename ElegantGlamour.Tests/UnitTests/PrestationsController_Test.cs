@@ -27,10 +27,10 @@ namespace ElegantGlamour.Tests.UnitTests
         /// Test the Get a prestation by an id and return OK
         /// </summary>
         [Fact]
-        public async Task GetPrestationById_RETURN_OK()
+        public async Task GetPrestationById_Return_Ok()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetPrestationById_RETURN_OK));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetPrestationById_Return_Ok));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -62,10 +62,10 @@ namespace ElegantGlamour.Tests.UnitTests
         /// Test the Get a prestation by an id and return NOT_FOUND
         /// </summary>
         [Fact]
-        public async Task GetPrestationById_RETURN_NOT_FOUND()
+        public async Task GetPrestationById_Return_Not_Found()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetPrestationById_RETURN_NOT_FOUND));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetPrestationById_Return_Not_Found));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -97,10 +97,10 @@ namespace ElegantGlamour.Tests.UnitTests
         /// Test return all prestations response 200 OK
         /// </summary>
         [Fact]
-        public async void GetPrestations_RETURN()
+        public async void GetPrestations_Return_Ok()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetPrestations_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetPrestations_Return_Ok));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -131,10 +131,10 @@ namespace ElegantGlamour.Tests.UnitTests
         /// Create a prestation response OK 201
         /// </summary>
         [Fact]
-        public async Task POST_Create_Prestation_RETURN_OK()
+        public async Task POST_Create_Prestation_Return_Ok()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_RETURN_OK));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Ok));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -166,6 +166,50 @@ namespace ElegantGlamour.Tests.UnitTests
             #region Assert
             Assert.IsType<ApiResponse>(response);
             Assert.Equal(201, response.StatusCode);
+            #endregion
+        }
+
+        /// <summary>
+        /// Create a prestation response OK 201
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_Return_Error_Category_Does_Not_Exist()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Error_Category_Does_Not_Exist));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "TEST_PRESTATION",
+                Description = "Ceci est un test prestation",
+                Price = 10,
+                Duration = 60,
+                CategoryId = 89
+            };
+            #region Act
+
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreatePrestation(addPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Category_Does_Not_Exist, apiException.CustomError.ToString());
+
             #endregion
         }
     }
