@@ -11,6 +11,7 @@ using static Microsoft.AspNetCore.Http.StatusCodes;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using AutoWrapper.Wrappers;
+using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.API.Controllers
 {
@@ -30,7 +31,7 @@ namespace ElegantGlamour.API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<GetPrestationDto>> CreatePrestation([FromBody] AddPrestationDto newPrestation)
+        public async Task<ApiResponse> CreatePrestation([FromBody] AddPrestationDto newPrestation)
         {
             var validator = new AddPrestationDtoValidator();
             try
@@ -45,7 +46,15 @@ namespace ElegantGlamour.API.Controllers
 
                 var getPrestationDto = _mapper.Map<Prestation, GetPrestationDto>(newPrestationCreated);
 
-                return Ok(getPrestationDto);
+                return new ApiResponse("La prestation a été correctement crée", getPrestationDto, Status201Created);
+            }
+            catch( CategoryDoesNotExistException ex)
+            {
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+
+                var apiException = new ApiException(ex.Message, Status400BadRequest);
+                apiException.CustomError = ex.Message;
+                throw apiException;
             }
             catch (Exception ex)
             {

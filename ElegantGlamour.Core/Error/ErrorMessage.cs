@@ -11,5 +11,6 @@ namespace ElegantGlamour.Core.Error
         public static string Err_Category_Max_Size => "La taille maximale du titre est de 50 caractères";
 
         public static string Err_Category_Already_Exist => "La catégorie existe dejà";
+        public static string Err_Category_Does_Not_Exist => "La catégorie n'existe pas";
     }
 }

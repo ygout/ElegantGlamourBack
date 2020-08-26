@@ -126,5 +126,47 @@ namespace ElegantGlamour.Tests.UnitTests
             Assert.IsAssignableFrom<IEnumerable<GetPrestationDto>>(response);
             #endregion
         }
+
+        /// <summary>
+        /// Create a prestation response OK 201
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_RETURN_OK()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_RETURN_OK));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "TEST_PRESTATION",
+                Description = "Ceci est un test prestation",
+                Price = 10,
+                Duration = 60,
+                CategoryId = 1
+            };
+            #region Act
+            var response = await controller.CreatePrestation(addPrestation);
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.IsType<ApiResponse>(response);
+            Assert.Equal(201, response.StatusCode);
+            #endregion
+        }
     }
 }
