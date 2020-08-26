@@ -14,7 +14,6 @@ namespace ElegantGlamour.Data
         public UnitOfWork(ElegantGlamourDbContext context)
         {
             this._context = context;
-
         }
         public IPrestationRepository Prestations => _prestationRepository = _prestationRepository ?? new PrestationRepository(_context);
 

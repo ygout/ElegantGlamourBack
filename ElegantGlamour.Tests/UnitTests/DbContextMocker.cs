@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Data;
+using System.Security.Cryptography;
 
 namespace ElegantGlamour.Tests.UnitTests
 {
@@ -20,6 +21,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var dbContext = new ElegantGlamourDbContext(options);
 
             // Add entities in memory
+
             dbContext.Seed();
 
             return dbContext;

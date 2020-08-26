@@ -129,7 +129,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task POST_Create_RETURNS_OK()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_RETURNS_OK));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -143,7 +143,8 @@ namespace ElegantGlamour.Tests.UnitTests
 
             var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
             #endregion
-            var addCategory = new AddCategoryDto() {
+            var addCategory = new AddCategoryDto()
+            {
                 Title = "TEST_CATEGORY",
             };
             #region Act
@@ -164,7 +165,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task POST_Create_RETURN_ERROR_NOT_EMPTY()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_RETURN_ERROR_NOT_EMPTY));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -198,7 +199,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task POST_Create_RETURN_ERROR_MAX_LENGTH()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_RETURN_ERROR_MAX_LENGTH));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -212,7 +213,7 @@ namespace ElegantGlamour.Tests.UnitTests
 
             var controller = new CategoriesController(mockCateogryService, mapper, mockLogger);
             #endregion
-            var addCategory = new AddCategoryDto() { Title = "TitreDuneCategorieAvecPlusde50caractereouicestbeacoutroplongjenesaistoujourspasquoimettreestonaplusde50caractere???"};
+            var addCategory = new AddCategoryDto() { Title = "TitreDuneCategorieAvecPlusde50caractereouicestbeacoutroplongjenesaistoujourspasquoimettreestonaplusde50caractere???" };
             #region Act
             var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreateCategory(addCategory));
 
@@ -233,7 +234,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task POST_Create_RETURN_ERROR_ALREADY_EXIST()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_RETURN_ERROR_ALREADY_EXIST));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -268,7 +269,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task PUT_UPDATE_CATEGORY_ERROR_NOT_FOUND()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(PUT_UPDATE_CATEGORY_ERROR_NOT_FOUND));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -302,7 +303,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task PUT_UPDATE_CATEGORY_RETURN_ERROR_NOT_EMPTY()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(PUT_UPDATE_CATEGORY_RETURN_ERROR_NOT_EMPTY));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -338,7 +339,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task PUT_UPDATE_CATEGORY_RETURN_ERROR_MAX_LENGTH()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(PUT_UPDATE_CATEGORY_RETURN_ERROR_MAX_LENGTH));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -374,7 +375,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task PUT_UPDATE_CATEGORY_RETURN_ERROR_ALREADY_EXIST()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(PUT_UPDATE_CATEGORY_RETURN_ERROR_ALREADY_EXIST));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -410,7 +411,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task PUT_UPDATE_CATEGORY_RETURNS_OK()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(PUT_UPDATE_CATEGORY_RETURNS_OK));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -448,7 +449,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task DELETE_CATEGORY_RETURNS_OK()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(DELETE_CATEGORY_RETURNS_OK));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -474,7 +475,7 @@ namespace ElegantGlamour.Tests.UnitTests
             Assert.Equal(200, response.StatusCode);
             #endregion
         }
-        
+
         /// <summary>
         /// Test the delete Category method with unknown id return not found
         /// </summary>
@@ -482,7 +483,7 @@ namespace ElegantGlamour.Tests.UnitTests
         public async Task DELETE_CATEGORY_RETURNS_NOT_FOUND()
         {
             #region Arrange
-            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(GetCategories_RETURN));
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(DELETE_CATEGORY_RETURNS_NOT_FOUND));
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
