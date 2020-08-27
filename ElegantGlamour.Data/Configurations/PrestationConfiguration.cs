@@ -20,6 +20,7 @@ namespace ElegantGlamour.Data.Configurations
                 .HasForeignKey(p => p.CategoryId);
                 
             builder.ToTable("Prestations");
+
         }
     }
 }

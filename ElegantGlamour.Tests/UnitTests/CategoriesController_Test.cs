@@ -189,7 +189,7 @@ namespace ElegantGlamour.Tests.UnitTests
             #region Assert
 
             Assert.Equal(400, apiException.StatusCode);
-            Assert.Contains(ErrorMessage.Err_Category_Not_Empty, apiException.CustomError.ToString());
+            Assert.Contains(ErrorMessage.Err_Category_Title_Not_Empty, apiException.CustomError.ToString());
             #endregion
         }
         /// <summary>
@@ -223,7 +223,7 @@ namespace ElegantGlamour.Tests.UnitTests
             #region Assert
 
             Assert.Equal(400, apiException.StatusCode);
-            Assert.Contains(ErrorMessage.Err_Category_Max_Size, apiException.CustomError.ToString());
+            Assert.Contains(ErrorMessage.Err_Category_Title_Max_Size, apiException.CustomError.ToString());
             #endregion
         }
 
@@ -364,12 +364,12 @@ namespace ElegantGlamour.Tests.UnitTests
             #region Assert
 
             Assert.Equal(400, apiException.StatusCode);
-            Assert.Contains(ErrorMessage.Err_Category_Max_Size, apiException.CustomError.ToString());
+            Assert.Contains(ErrorMessage.Err_Category_Title_Max_Size, apiException.CustomError.ToString());
             #endregion
         }
 
         /// <summary>
-        /// Test the UpdateCategory method response Erreur 50 length Max
+        /// Test the UpdateCategory method response Erreur category already exist (id already exist)
         /// </summary>
         [Fact]
         public async Task Put_Update_Category_Return_Error_Already_Exist()

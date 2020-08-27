@@ -39,7 +39,7 @@ namespace ElegantGlamour.API.Controllers
                 var validationResult = await validator.ValidateAsync(newPrestation);
 
                 if (!validationResult.IsValid)
-                    throw new ApiException(validationResult.Errors);
+                    throw new ApiException(validationResult);
 
                 var prestationToCreate = _mapper.Map<AddPrestationDto, Prestation>(newPrestation);
                 var newPrestationCreated = await _prestationService.CreatePrestation(prestationToCreate);

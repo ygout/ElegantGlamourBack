@@ -212,5 +212,49 @@ namespace ElegantGlamour.Tests.UnitTests
 
             #endregion
         }
+
+        /// <summary>
+        /// Create a prestation with error description can't be empty
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_Return_Error_Title_Empty()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Error_Title_Empty));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "",
+                Description = "",
+                Price = 10,
+                Duration = 60,
+                CategoryId = 89
+            };
+            #region Act
+
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreatePrestation(addPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Prestation_Title_Not_Empty, apiException.CustomError.ToString());
+
+            #endregion
+        }
     }
 }
