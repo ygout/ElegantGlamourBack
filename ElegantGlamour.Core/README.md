@@ -1,4 +1,4 @@
-# Requirements
+ Requirements
  * .NET Core 3.0
  * MySql
  * Vs code or Visual Studio Community

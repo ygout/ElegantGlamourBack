@@ -1,17 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantGlamour.Core", "ElegantGlamour.Core\ElegantGlamour.Core.csproj", "{15E12E95-0D8E-42B9-B677-DE4D627E97AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantGlamour.Core", "ElegantGlamour.Core\ElegantGlamour.Core.csproj", "{15E12E95-0D8E-42B9-B677-DE4D627E97AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantGlamour.Data", "ElegantGlamour.Data\ElegantGlamour.Data.csproj", "{7D2C81BA-3986-487E-B8DF-05946D8E14C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantGlamour.Data", "ElegantGlamour.Data\ElegantGlamour.Data.csproj", "{7D2C81BA-3986-487E-B8DF-05946D8E14C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantGlamour.Services", "ElegantGlamour.Services\ElegantGlamour.Services.csproj", "{EA8E4D85-EE2A-46B9-A831-539263252272}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantGlamour.Services", "ElegantGlamour.Services\ElegantGlamour.Services.csproj", "{EA8E4D85-EE2A-46B9-A831-539263252272}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantGlamour.Api", "ElegantGlamour.Api\ElegantGlamour.Api.csproj", "{C3708991-895A-4042-A344-BF8D8167A896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantGlamour.Api", "ElegantGlamour.Api\ElegantGlamour.Api.csproj", "{C3708991-895A-4042-A344-BF8D8167A896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElegantGlamour.Tests", "ElegantGlamour.Tests\ElegantGlamour.Tests.csproj", "{F03C8A6A-8BE0-42C0-A371-D2AEA0EBFC0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElegantGlamour.Tests", "ElegantGlamour.Tests\ElegantGlamour.Tests.csproj", "{F03C8A6A-8BE0-42C0-A371-D2AEA0EBFC0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02648160-8914-44A5-ABA4-A78A208B45CE}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{15E12E95-0D8E-42B9-B677-DE4D627E97AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +88,11 @@ Global
 		{F03C8A6A-8BE0-42C0-A371-D2AEA0EBFC0F}.Release|x64.Build.0 = Release|Any CPU
 		{F03C8A6A-8BE0-42C0-A371-D2AEA0EBFC0F}.Release|x86.ActiveCfg = Release|Any CPU
 		{F03C8A6A-8BE0-42C0-A371-D2AEA0EBFC0F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64A2E865-C7BA-4831-9063-22B1189078E5}
 	EndGlobalSection
 EndGlobal

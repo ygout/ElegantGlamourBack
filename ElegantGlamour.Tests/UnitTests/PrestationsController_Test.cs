@@ -214,7 +214,7 @@ namespace ElegantGlamour.Tests.UnitTests
         }
 
         /// <summary>
-        /// Create a prestation with error description can't be empty
+        /// Create a prestation with error title can't be empty
         /// </summary>
         [Fact]
         public async Task POST_Create_Prestation_Return_Error_Title_Empty()
@@ -238,7 +238,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var addPrestation = new AddPrestationDto()
             {
                 Title = "",
-                Description = "",
+                Description = "Test",
                 Price = 10,
                 Duration = 60,
                 CategoryId = 89
@@ -256,5 +256,93 @@ namespace ElegantGlamour.Tests.UnitTests
 
             #endregion
         }
+        /// <summary>
+        /// Create a prestation with error description can't be empty
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_Return_Error_Description_Empty()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Error_Description_Empty));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "Test",
+                Description = "",
+                Price = 10,
+                Duration = 60,
+                CategoryId = 89
+            };
+            #region Act
+
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreatePrestation(addPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Prestation_Description_Not_Empty, apiException.CustomError.ToString());
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Create a prestation with error price can't be at null
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_Return_Error_Price_Empty()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Error_Price_Empty));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "Test",
+                Description = "Test",
+                Duration = 60,
+                CategoryId = 89
+            };
+            #region Act
+
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreatePrestation(addPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Prestation_Price_Not_Empty, apiException.CustomError.ToString());
+
+            #endregion
+        }
+
+
     }
 }
