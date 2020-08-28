@@ -39,11 +39,8 @@ Layer architecture:
 `dotnet build`
 
 # EF Core Update Database - Add Migration
-
-##### Add migration  
 `dotnet ef --startup-project ElegantGlamour.Api/ElegantGlamour.Api.csproj migrations add InitialModel -p ElegantGlamour.Data\ElegantGlamour.Data.csproj`
 
-##### Update database (After migration)
 `dotnet ef --startup-project ElegantGlamour.Api/ElegantGlamour.Api.csproj database update`
 
 
