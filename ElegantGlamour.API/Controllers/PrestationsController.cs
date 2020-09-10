@@ -11,6 +11,7 @@ using static Microsoft.AspNetCore.Http.StatusCodes;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using AutoWrapper.Wrappers;
+using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.API.Controllers
 {
@@ -30,7 +31,7 @@ namespace ElegantGlamour.API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<GetPrestationDto>> CreatePrestation([FromBody] AddPrestationDto newPrestation)
+        public async Task<ApiResponse> CreatePrestation([FromBody] AddPrestationDto newPrestation)
         {
             var validator = new AddPrestationDtoValidator();
             try
@@ -38,14 +39,22 @@ namespace ElegantGlamour.API.Controllers
                 var validationResult = await validator.ValidateAsync(newPrestation);
 
                 if (!validationResult.IsValid)
-                    throw new ApiException(validationResult.Errors);
+                    throw new ApiException(validationResult);
 
                 var prestationToCreate = _mapper.Map<AddPrestationDto, Prestation>(newPrestation);
                 var newPrestationCreated = await _prestationService.CreatePrestation(prestationToCreate);
 
                 var getPrestationDto = _mapper.Map<Prestation, GetPrestationDto>(newPrestationCreated);
 
-                return Ok(getPrestationDto);
+                return new ApiResponse("La prestation a �t� correctement cr�e", getPrestationDto, Status201Created);
+            }
+            catch( CategoryDoesNotExistException ex)
+            {
+                _logger.LogError("There was an error on '{0}' invocation: {1}", MethodBase.GetCurrentMethod(), ex);
+
+                var apiException = new ApiException(ex.Message, Status400BadRequest);
+                apiException.CustomError = ex.Message;
+                throw apiException;
             }
             catch (Exception ex)
             {
@@ -86,14 +95,14 @@ namespace ElegantGlamour.API.Controllers
             }
         }
         [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<GetPrestationDto>>> GetPrestations()
+        public async Task<IEnumerable<GetPrestationDto>> GetPrestations()
         {
             try
             {
                 IEnumerable<Prestation> prestations = await this._prestationService.GetAllPrestations();
                 IEnumerable<GetPrestationDto> prestationsDtos = this._mapper.Map<IEnumerable<Prestation>, IEnumerable<GetPrestationDto>>(prestations);
 
-                return Ok(prestationsDtos);
+                return prestationsDtos;
             }
             catch (Exception ex)
             {
@@ -129,7 +138,7 @@ namespace ElegantGlamour.API.Controllers
             {
                 var prestationToBeDeleted = await _prestationService.GetPrestationById(id);
 
-                if(prestationToBeDeleted == null)
+                if (prestationToBeDeleted == null)
                     return NotFound();
 
                 await _prestationService.DeletePrestation(prestationToBeDeleted);

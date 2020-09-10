@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ElegantGlamour.Core;
+using ElegantGlamour.Core.Error;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
 
@@ -24,7 +25,7 @@ namespace ElegantGlamour.Services
             {
                 bool isCategoryExist = await _categoryService.IsCategoryIdExist(newPrestation.CategoryId);
                 if (!isCategoryExist)
-                    throw new Exception("La categorie n'existe pas");
+                    throw new CategoryDoesNotExistException();
                 await _unitOfWork.Prestations.AddAsync(newPrestation);
                 await _unitOfWork.CommitAsync();
 

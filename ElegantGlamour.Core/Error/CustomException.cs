@@ -15,4 +15,11 @@ namespace ElegantGlamour.Core.Error
             : base(String.Format(ErrorMessage.Err_Category_Already_Exist))
         { }
     }
+
+    public class CategoryDoesNotExistException : Exception
+    {
+        public CategoryDoesNotExistException()
+            :base(String.Format(ErrorMessage.Err_Category_Does_Not_Exist))
+        { }
+    }
 }
