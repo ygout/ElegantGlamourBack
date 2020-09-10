@@ -7,6 +7,7 @@ using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using static Microsoft.AspNetCore.Http.StatusCodes;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 using AutoWrapper.Wrappers;
@@ -103,7 +104,7 @@ namespace ElegantGlamour.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetPrestationDto>> GetPrestationById(int id)
+        public async Task<GetPrestationDto> GetPrestationById(int id)
         {
             try
             {
@@ -111,9 +112,9 @@ namespace ElegantGlamour.API.Controllers
                 var prestationDto = this._mapper.Map<Prestation, GetPrestationDto>(prestation);
 
                 if (prestationDto == null)
-                    return NotFound();
+                    throw new ApiException($"La prestation avec pour id : {id} n'existe pas", Status404NotFound);
 
-                return Ok(prestationDto);
+                return prestationDto;
             }
             catch (Exception ex)
             {

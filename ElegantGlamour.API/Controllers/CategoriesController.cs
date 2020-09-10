@@ -58,7 +58,7 @@ namespace ElegantGlamour.Api.Controllers
                 var category = await this._categoryService.GetCategoryById(id);
                 var categoryDto = this._mapper.Map<Category, GetCategoryDto>(category);
                 if (categoryDto == null)
-                    throw new ApiException($"Record with id: {id} does not exist.", Status404NotFound);
+                    throw new ApiException($"La categorie avec pour id: {id} n'existe pas", Status404NotFound);
 
                 return categoryDto;
             }
