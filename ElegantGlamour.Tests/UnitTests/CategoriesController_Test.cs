@@ -328,7 +328,7 @@ namespace ElegantGlamour.Tests.UnitTests
             #region Assert
 
             Assert.Equal(400, apiException.StatusCode);
-            Assert.Contains(ErrorMessage.Err_Category_Not_Empty, apiException.CustomError.ToString());
+            Assert.Contains(ErrorMessage.Err_Category_Title_Not_Empty, apiException.CustomError.ToString());
             #endregion
         }
 

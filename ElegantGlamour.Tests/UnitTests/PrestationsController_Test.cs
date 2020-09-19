@@ -343,6 +343,134 @@ namespace ElegantGlamour.Tests.UnitTests
             #endregion
         }
 
+        /// <summary>
+        /// Create a prestation with error duration can't be equal to 0
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_Return_Error_Duration_Equal_Zero()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Error_Duration_Equal_Zero));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "Test",
+                Description = "Test",
+                Duration = 0,
+                CategoryId = 89,
+                Price = 50
+            };
+            #region Act
+
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreatePrestation(addPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Prestation_Duration_Not_Equal_To_0, apiException.CustomError.ToString());
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Create a prestation with error duration can't be empty
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_Return_Error_Duration_Empty()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Error_Duration_Empty));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "Test",
+                Description = "Test",
+                CategoryId = 89,
+                Price = 50
+            };
+            #region Act
+
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreatePrestation(addPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Prestation_Duration_Not_Empty, apiException.CustomError.ToString());
+
+            #endregion
+        }
+        /// <summary>
+        /// Create a prestation with error category id can't be empty
+        /// </summary>
+        [Fact]
+        public async Task POST_Create_Prestation_Return_Error_Category_Empty()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(POST_Create_Prestation_Return_Error_Category_Empty));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var addPrestation = new AddPrestationDto()
+            {
+                Title = "Test",
+                Description = "Test",
+                Price = 50,
+                Duration = 50
+            };
+            #region Act
+
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.CreatePrestation(addPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(400, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Category_Not_Empty, apiException.CustomError.ToString());
+
+            #endregion
+        }
 
     }
 }

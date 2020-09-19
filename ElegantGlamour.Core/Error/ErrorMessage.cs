@@ -16,6 +16,7 @@ namespace ElegantGlamour.Core.Error
         public static string Err_Prestation_Description_Not_Empty => "La description de la préstation ne peut pas être vide";
         public static string Err_Prestation_Price_Not_Empty => "Le prix de la préstation ne peut pas être vide";
         public static string Err_Prestation_Duration_Not_Empty => "La durée de la préstation ne peut pas être vide";
+        public static string Err_Prestation_Duration_Not_Equal_To_0 => "La durée de la préstation ne peut pas être équale à 0";
 
 
     }
