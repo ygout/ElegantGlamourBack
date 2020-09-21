@@ -14,6 +14,7 @@ using static Microsoft.AspNetCore.Http.StatusCodes;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
 using ElegantGlamour.Core.Error;
+using ElegantGlamour.Api.Swagger;
 
 namespace ElegantGlamour.Api.Controllers
 {
@@ -33,6 +34,8 @@ namespace ElegantGlamour.Api.Controllers
         }
 
         [HttpGet("")]
+        [ProducesResponseType(typeof(ResponseWrapper<IEnumerable<GetCategoryDto>>), Status200OK)]
+
         public async Task<IEnumerable<GetCategoryDto>> GetCategories()
         {
             try
@@ -51,6 +54,8 @@ namespace ElegantGlamour.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ResponseWrapper<GetCategoryDto>), Status200OK)]
+
         public async Task<GetCategoryDto> GetCategoryById(int id)
         {
             try
@@ -70,7 +75,7 @@ namespace ElegantGlamour.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse), Status201Created)]
+        [ProducesResponseType(typeof(ResponseWrapper<>), Status201Created)]
         public async Task<ApiResponse> CreateCategory([FromBody] AddCategoryDto addCategoryDto)
         {
             var validator = new AddCategoryDtoValidator();
@@ -107,6 +112,8 @@ namespace ElegantGlamour.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(ResponseWrapper<>), Status201Created)]
+
         public async Task<ApiResponse> UpdateCategory(int id, [FromBody] UpdateCategoryDto updateCategoryDto)
         {
             var validator = new UpdateCategoryDtoValidator();
@@ -146,6 +153,8 @@ namespace ElegantGlamour.Api.Controllers
             }
         }
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(ResponseWrapper<>), Status200OK)]
+
         public async Task<ApiResponse> DeleteCategory(int id)
         {
             try

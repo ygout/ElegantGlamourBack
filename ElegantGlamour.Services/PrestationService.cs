@@ -90,7 +90,7 @@ namespace ElegantGlamour.Services
 
                 bool isCategoryExist = await _categoryService.IsCategoryIdExist(prestation.CategoryId);
                 if (!isCategoryExist)
-                    throw new Exception("La categorie n'existe pas");
+                    throw new CategoryDoesNotExistException();
 
                 prestationToBeUpdate.Category = prestation.Category;
 
