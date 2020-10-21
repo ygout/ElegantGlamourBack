@@ -149,7 +149,7 @@ namespace ElegantGlamour.API.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(ResponseWrapper<>), Status200OK)]
+        [ProducesResponseType(typeof(ResponseWrapper<bool>), Status200OK)]
 
         public async Task<ApiResponse> DeletePrestation(int id)
         {

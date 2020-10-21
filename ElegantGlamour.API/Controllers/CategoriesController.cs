@@ -75,7 +75,7 @@ namespace ElegantGlamour.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseWrapper<>), Status201Created)]
+        [ProducesResponseType(typeof(ResponseWrapper<GetCategoryDto>), Status201Created)]
         public async Task<ApiResponse> CreateCategory([FromBody] AddCategoryDto addCategoryDto)
         {
             var validator = new AddCategoryDtoValidator();
@@ -112,7 +112,7 @@ namespace ElegantGlamour.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(typeof(ResponseWrapper<>), Status201Created)]
+        [ProducesResponseType(typeof(ResponseWrapper<GetCategoryDto>), Status201Created)]
 
         public async Task<ApiResponse> UpdateCategory(int id, [FromBody] UpdateCategoryDto updateCategoryDto)
         {
@@ -153,7 +153,7 @@ namespace ElegantGlamour.Api.Controllers
             }
         }
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(ResponseWrapper<>), Status200OK)]
+        [ProducesResponseType(typeof(ResponseWrapper<bool>), Status200OK)]
 
         public async Task<ApiResponse> DeleteCategory(int id)
         {
