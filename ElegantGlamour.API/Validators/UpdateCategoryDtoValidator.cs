@@ -1,4 +1,4 @@
-using ElegantGlamour.Core.Dtos;
+using ElegantGlamour.Api.Dtos;
 using ElegantGlamour.Core.Error;
 using FluentValidation;
 

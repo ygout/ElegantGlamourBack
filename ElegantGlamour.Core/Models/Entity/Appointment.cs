@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using ElegantGlamour.Core.Models.Entity;
 
 namespace ElegantGlamour.Core.Models
 {
-    public class Appointment
+    public class Appointment : BaseEntity
     {
-        public int Id { get; set; }
         public List<Prestation> Prestations { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

@@ -1,10 +1,10 @@
 using ElegantGlamour.Core.Models;
+using ElegantGlamour.Core.Models.Entity;
 
 namespace ElegantGlamour.Core.Models
 {
-    public class PortfolioImage
+    public class PortfolioImage : BaseEntity
     {
-        public int Id { get; set; }
         public string Path { get; set; }
         public string Title { get; set; }
         public string  Description { get; set; }

@@ -14,7 +14,7 @@ using Moq;
 using Microsoft.AspNetCore.Mvc;
 using AutoWrapper.Wrappers;
 using ElegantGlamour.Api.Mapping;
-using ElegantGlamour.Core.Dtos;
+using ElegantGlamour.Api.Dtos;
 using System.Threading.Tasks;
 using ElegantGlamour.Core.Error;
 using ElegantGlamour.API.Controllers;
@@ -775,10 +775,128 @@ namespace ElegantGlamour.Tests.UnitTests
 
             #region Assert
             Assert.Equal(404, apiException.StatusCode);
-            Assert.Contains(ErrorMessage.Err_Prestation_Id_Does_Not_Exist, apiException.CustomError.ToString());
+            Assert.Contains(ErrorMessage.Err_Prestation_Id_Does_Not_Exist, apiException.Message);
 
             #endregion
         }
 
+        /// <summary>
+        /// Update a prestation with no error is OK
+        /// </summary>
+        [Fact]
+        public async Task Put_Update_Prestation_Return_Ok()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(Put_Update_Prestation_Return_Ok));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+            var updatePrestation = new UpdatePrestationDto()
+            {
+                Description = "this is description updated",
+                Price = 60,
+                Title = "test title updated",
+                Duration = 120,
+                CategoryId = 1
+            };
+            int idPrestation = 1;
+
+            #region Act
+            var response = await controller.UpdatePrestation(idPrestation, updatePrestation);
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.IsType<ApiResponse>(response);
+            Assert.Equal(201, response.StatusCode);
+            #endregion
+        }
+
+        /// <summary>
+        /// Delete a prestation return OK
+        /// </summary>
+        [Fact]
+        public async Task Delete_Prestation_Return_Ok()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(Delete_Prestation_Return_Ok));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+        
+            int idPrestation = 1;
+
+            #region Act
+            var response = await controller.DeletePrestation(idPrestation);
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.IsType<ApiResponse>(response);
+            Assert.Equal(200, response.StatusCode);
+            #endregion
+        }
+
+         /// <summary>
+        /// Delete a prestation return OK
+        /// </summary>
+        [Fact]
+        public async Task Delete_Prestation_Error_Prestation_Id_Does_Not_Exist()
+        {
+            #region Arrange
+            var dbContext = DbContextMocker.GetElegantGlamourDbContext(nameof(Delete_Prestation_Error_Prestation_Id_Does_Not_Exist));
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = new Mapper(config);
+
+            var mockUnitOfWork = new UnitOfWork(dbContext);
+            var mockCateogryService = new CategoryService(mockUnitOfWork);
+            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+
+            var mockLogger = Mock.Of<ILogger<PrestationsController>>();
+
+            var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
+            #endregion
+        
+            int idPrestation = 1;
+
+            #region Act
+            var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.DeletePrestation(idPrestation));
+
+            dbContext.Dispose();
+            #endregion
+
+            #region Assert
+            Assert.Equal(404, apiException.StatusCode);
+            Assert.Contains(ErrorMessage.Err_Prestation_Id_Does_Not_Exist, apiException.Message);
+
+            #endregion
+        }
     }
 }

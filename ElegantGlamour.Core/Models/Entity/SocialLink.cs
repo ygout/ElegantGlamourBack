@@ -1,3 +1,5 @@
+using ElegantGlamour.Core.Models.Entity;
+
 namespace ElegantGlamour.Core.Models
 {
     public enum LINK_TYPE  {
@@ -6,9 +8,8 @@ namespace ElegantGlamour.Core.Models
         LINKEDIN,
         PRINTEREST
     }
-    public class SocialLink
+    public class SocialLink : BaseEntity
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string LinkPath { get; set; }
         public LINK_TYPE Type { get; set; }

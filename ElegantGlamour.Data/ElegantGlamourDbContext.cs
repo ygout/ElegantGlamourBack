@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Data.Configurations;
+using System.Reflection;
+using System.Linq;
 
 namespace ElegantGlamour.Data
 {
@@ -12,6 +14,20 @@ namespace ElegantGlamour.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+            {
+                foreach (var entityType in builder.Model.GetEntityTypes())
+                {
+                    var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == typeof(decimal));
+                    foreach (var property in properties)
+                    {
+                        builder.Entity(entityType.Name).Property(property.Name).HasConversion<double>();
+                    }
+                }
+            }
             builder.Entity<Category>().HasData(
                 new Category() { Id = 1, Title = "Maquillage" },
                 new Category() { Id = 2, Title = "Soins" },
@@ -23,7 +39,7 @@ namespace ElegantGlamour.Data
                 {
                     Id = 1,
                     Title = "Prestation1",
-                    Description = "ceci est la préstation numéro 1",
+                    Description = "ceci est la prï¿½station numï¿½ro 1",
                     Price = 30,
                     Duration = 45,
                     CategoryId = 1,
@@ -32,7 +48,7 @@ namespace ElegantGlamour.Data
                 {
                     Id = 2,
                     Title = "Prestation2",
-                    Description = "ceci est la préstation numéro 2",
+                    Description = "ceci est la prï¿½station numï¿½ro 2",
                     Price = 30,
                     Duration = 45,
                     CategoryId = 2,
@@ -41,7 +57,7 @@ namespace ElegantGlamour.Data
                 {
                     Id = 3,
                     Title = "Prestation3",
-                    Description = "ceci est la préstation numéro 3",
+                    Description = "ceci est la prï¿½station numï¿½ro 3",
                     Price = 30,
                     Duration = 45,
                     CategoryId = 3,
@@ -50,7 +66,7 @@ namespace ElegantGlamour.Data
                {
                    Id = 4,
                    Title = "Prestation1",
-                   Description = "ceci est la préstation numéro 4",
+                   Description = "ceci est la prï¿½station numï¿½ro 4",
                    Price = 30,
                    Duration = 45,
                    CategoryId = 1,
@@ -59,7 +75,7 @@ namespace ElegantGlamour.Data
                 {
                     Id = 5,
                     Title = "Prestation1",
-                    Description = "ceci est la préstation numéro 5",
+                    Description = "ceci est la prï¿½station numï¿½ro 5",
                     Price = 30,
                     Duration = 45,
                     CategoryId = 1,
@@ -68,7 +84,7 @@ namespace ElegantGlamour.Data
                 {
                     Id = 6,
                     Title = "Prestation1",
-                    Description = "ceci est la préstation numéro 6",
+                    Description = "ceci est la prï¿½station numï¿½ro 6",
                     Price = 30,
                     Duration = 45,
                     CategoryId = 2,
@@ -77,7 +93,7 @@ namespace ElegantGlamour.Data
                 {
                     Id = 7,
                     Title = "Prestation1",
-                    Description = "ceci est la préstation numéro 7",
+                    Description = "ceci est la prï¿½station numï¿½ro 7",
                     Price = 30,
                     Duration = 45,
                     CategoryId = 2,
@@ -86,7 +102,7 @@ namespace ElegantGlamour.Data
                 {
                     Id = 8,
                     Title = "Prestation1",
-                    Description = "ceci est la préstation numéro 8",
+                    Description = "ceci est la prï¿½station numï¿½ro 8",
                     Price = 30,
                     Duration = 45,
                     CategoryId = 3,

@@ -1,8 +1,9 @@
+using ElegantGlamour.Core.Models.Entity;
+
 namespace ElegantGlamour.Core.Models
 {
-    public class Prestation : IPrestation
+    public class Prestation : BaseEntity, IPrestation
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int Duration { get; set; }

@@ -14,7 +14,7 @@ using Moq;
 using Microsoft.AspNetCore.Mvc;
 using AutoWrapper.Wrappers;
 using ElegantGlamour.Api.Mapping;
-using ElegantGlamour.Core.Dtos;
+using ElegantGlamour.Api.Dtos;
 using System.Threading.Tasks;
 using ElegantGlamour.Core.Error;
 

@@ -1,6 +1,6 @@
-namespace ElegantGlamour.Core.Dtos
+namespace ElegantGlamour.Api.Dtos
 {
-    public class UpdatePrestationDto
+    public class AddPrestationDto
     {
         public string Title { get; set; }
         public string Description { get; set; }

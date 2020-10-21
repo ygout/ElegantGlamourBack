@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using ElegantGlamour.Api.Validators;
-using ElegantGlamour.Core.Dtos;
+using ElegantGlamour.Api.Dtos;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -151,7 +151,7 @@ namespace ElegantGlamour.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ResponseWrapper<>), Status200OK)]
 
-        public async Task<ActionResult<ApiResponse>> DeletePrestation(int id)
+        public async Task<ApiResponse> DeletePrestation(int id)
         {
             try
             {

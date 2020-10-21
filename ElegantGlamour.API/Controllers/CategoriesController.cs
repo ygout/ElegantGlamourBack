@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using ElegantGlamour.Api.Validators;
-using ElegantGlamour.Core.Dtos;
+using ElegantGlamour.Api.Dtos;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -94,7 +94,7 @@ namespace ElegantGlamour.Api.Controllers
 
                 var getCategoryDto = _mapper.Map<Category, GetCategoryDto>(categoryCreated);
 
-                return new ApiResponse("La catégorie a été correctement crée", getCategoryDto, Status201Created);
+                return new ApiResponse("La catï¿½gorie a ï¿½tï¿½ correctement crï¿½e", getCategoryDto, Status201Created);
             }
             catch (CategoryAlreadyExistException ex)
             {
@@ -127,7 +127,7 @@ namespace ElegantGlamour.Api.Controllers
                 var categoryToBeUpdate = await _categoryService.GetCategoryById(id);
 
                 if (id == 0 || categoryToBeUpdate == null)
-                    throw new ApiException("La catégorie n'existe pas", Status404NotFound);
+                    throw new ApiException("La catï¿½gorie n'existe pas", Status404NotFound);
 
                 var category = _mapper.Map<UpdateCategoryDto, Category>(updateCategoryDto);
 
@@ -136,7 +136,7 @@ namespace ElegantGlamour.Api.Controllers
                 var updatedCategory = await _categoryService.GetCategoryById(id);
                 var updatedCategoryDto = _mapper.Map<Category, GetCategoryDto>(updatedCategory);
 
-                return new ApiResponse($"La catégorie avec pour id: {id} a été correctement modifié", updatedCategoryDto, Status201Created);
+                return new ApiResponse($"La catï¿½gorie avec pour id: {id} a ï¿½tï¿½ correctement modifiï¿½", updatedCategoryDto, Status201Created);
             }
             catch (CategoryAlreadyExistException ex)
             {
@@ -162,11 +162,11 @@ namespace ElegantGlamour.Api.Controllers
                 var categoryToBeDeleted = await _categoryService.GetCategoryById(id);
 
                 if (categoryToBeDeleted == null)
-                    throw new ApiException("La catégorie n'existe pas", Status404NotFound);
+                    throw new ApiException("La catï¿½gorie n'existe pas", Status404NotFound);
 
                 await _categoryService.DeleteCategory(categoryToBeDeleted);
 
-                return new ApiResponse($"La catégorie avec pour id: {id} a été correctement supprimé.", true);
+                return new ApiResponse($"La catï¿½gorie avec pour id: {id} a ï¿½tï¿½ correctement supprimï¿½.", true);
             }
             catch (Exception ex)
             {

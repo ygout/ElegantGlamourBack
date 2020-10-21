@@ -1,5 +1,5 @@
 using FluentValidation;
-using ElegantGlamour.Core.Dtos;
+using ElegantGlamour.Api.Dtos;
 using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.Api.Validators

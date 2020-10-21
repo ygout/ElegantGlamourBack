@@ -16,8 +16,9 @@ using ElegantGlamour.Services;
 using ElegantGlamour.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using AutoMapper; 
+using AutoMapper;
 using AutoWrapper;
+using ElegantGlamour.API.Extensions;
 
 namespace ElegantGlamour.Api
 {
@@ -38,14 +39,10 @@ namespace ElegantGlamour.Api
             services.AddDbContext<ElegantGlamourDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ElegantGlamour.Data"))
             );
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<IPrestationService, PrestationService>();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Elegant & Glamour API", Version = "v1" });
-            });
+            
+            services.AddApplicationServices();
+            
+            services.AddSwaggerServices();
 
             services.AddAutoMapper(typeof(Startup));
         }
@@ -61,13 +58,14 @@ namespace ElegantGlamour.Api
             app.UseHttpsRedirection();
 
             app.UseApiResponseAndExceptionWrapper(
-                new AutoWrapperOptions{
+                new AutoWrapperOptions
+                {
                     IsApiOnly = false,
                     IsDebug = true,
                     ShowStatusCode = true
                 }
             );
-            
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -77,12 +75,7 @@ namespace ElegantGlamour.Api
                 endpoints.MapControllers();
             });
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.RoutePrefix = "";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Elegant & Glamour API V1");
-            });
+            app.UseSwaggerDocumentation();
         }
     }
 }

@@ -1,3 +1,5 @@
+using ElegantGlamour.Core.Models.Entity;
+
 namespace ElegantGlamour.Core.Models
 {
     public class FooterGrid {
@@ -5,9 +7,8 @@ namespace ElegantGlamour.Core.Models
         public string Content { get; set; }
         public int Order { get; set; }
     }
-    public class Footer
+    public class Footer : BaseEntity
     {
-        public int Id { get; set; }
         public FooterGrid[] Grids { get; set; } = new FooterGrid[3];
         
     }

@@ -1,8 +1,9 @@
+using ElegantGlamour.Core.Models.Entity;
+
 namespace ElegantGlamour.Core.Models
 {
-    public class HomePage : IPage
+    public class HomePage : BaseEntity, IPage
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public string BannerImagePath { get; set; }
