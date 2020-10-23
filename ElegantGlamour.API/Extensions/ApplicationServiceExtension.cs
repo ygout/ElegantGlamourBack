@@ -11,7 +11,6 @@ namespace ElegantGlamour.API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IPrestationService, PrestationService>();
 
             return services;

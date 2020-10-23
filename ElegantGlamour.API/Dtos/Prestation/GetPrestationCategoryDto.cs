@@ -1,7 +1,8 @@
 namespace ElegantGlamour.Api.Dtos
 {
-    public class UpdateCategoryDto
+    public class GetPrestationCategoryDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
     }
 }

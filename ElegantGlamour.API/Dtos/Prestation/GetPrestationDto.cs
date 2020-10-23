@@ -7,6 +7,6 @@ namespace ElegantGlamour.Api.Dtos
         public string Description { get; set; }
         public int Price { get; set; }
         public int Duration { get; set; }
-        public GetCategoryDto Category { get; set; }
+        public string PrestationCategory { get; set; }
     }
 }

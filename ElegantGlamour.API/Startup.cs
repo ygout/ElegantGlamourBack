@@ -1,21 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using ElegantGlamour.Core;
 using ElegantGlamour.Data;
-using ElegantGlamour.Services;
-using ElegantGlamour.Core.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using AutoMapper;
 using AutoWrapper;
 using ElegantGlamour.API.Extensions;
@@ -35,13 +25,18 @@ namespace ElegantGlamour.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "./ElegtantGlamour.Web/dist";
+            });
 
             services.AddDbContext<ElegantGlamourDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ElegantGlamour.Data"))
             );
-            
+
             services.AddApplicationServices();
-            
+
             services.AddSwaggerServices();
 
             services.AddAutoMapper(typeof(Startup));
@@ -54,8 +49,16 @@ namespace ElegantGlamour.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                // app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseApiResponseAndExceptionWrapper(
                 new AutoWrapperOptions
@@ -76,6 +79,19 @@ namespace ElegantGlamour.Api
             });
 
             app.UseSwaggerDocumentation();
+
+            // app.UseSpa(spa =>
+            // {
+            //     // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //     // see https://go.microsoft.com/fwlink/?linkid=864501
+
+            //     spa.Options.SourcePath = "./ElegtantGlamour.Web";
+
+            //     if (env.IsDevelopment())
+            //     {
+            //         spa.UseAngularCliServer(npmScript: "start");
+            //     }
+            // });
         }
     }
 }

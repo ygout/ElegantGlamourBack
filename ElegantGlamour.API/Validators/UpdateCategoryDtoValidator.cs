@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace ElegantGlamour.Api.Validators
 {
-    public class UpdateCategoryDtoValidator : AbstractValidator<UpdateCategoryDto>
+    public class UpdateCategoryDtoValidator : AbstractValidator<UpdatePrestationCategoryDto>
     {
         public UpdateCategoryDtoValidator()
         {

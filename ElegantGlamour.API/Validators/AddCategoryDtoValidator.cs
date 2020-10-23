@@ -4,7 +4,7 @@ using ElegantGlamour.Core.Error;
 
 namespace ElegantGlamour.Api.Validators
 {
-    public class AddCategoryDtoValidator : AbstractValidator<AddCategoryDto>
+    public class AddCategoryDtoValidator : AbstractValidator<AddPrestationCategoryDto>
     {
         public AddCategoryDtoValidator()
         {
