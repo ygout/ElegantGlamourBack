@@ -21,7 +21,6 @@ namespace ElegantGlamour.Tests.UnitTests
             var dbContext = new ElegantGlamourDbContext(options);
 
             // Add entities in memory
-
             dbContext.Seed();
 
             return dbContext;

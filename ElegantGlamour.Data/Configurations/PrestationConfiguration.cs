@@ -10,17 +10,15 @@ namespace ElegantGlamour.Data.Configurations
         {
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Id).UseMySqlIdentityColumn();
+            builder.Property(p => p.Id).UseMySqlIdentityColumn().IsRequired();
 
             builder.Property(p => p.Title).IsRequired().HasMaxLength(50);
 
             builder
-                .HasOne(p => p.Category)
-                .WithMany(c => c.Prestations)
-                .HasForeignKey(p => p.CategoryId);
+                .HasOne(p => p.PrestationCategory)
+                .WithMany()
+                .HasForeignKey(p => p.PrestationCategoryId);
                 
-            builder.ToTable("Prestations");
-
         }
     }
 }

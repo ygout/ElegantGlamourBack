@@ -1,4 +1,4 @@
-namespace ElegantGlamour.Core.Models.Entity
+namespace ElegantGlamour.Core.Models
 {
     public class BaseEntity
     {

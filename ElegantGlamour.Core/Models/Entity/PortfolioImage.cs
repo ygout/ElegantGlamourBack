@@ -1,5 +1,4 @@
 using ElegantGlamour.Core.Models;
-using ElegantGlamour.Core.Models.Entity;
 
 namespace ElegantGlamour.Core.Models
 {
@@ -8,6 +7,6 @@ namespace ElegantGlamour.Core.Models
         public string Path { get; set; }
         public string Title { get; set; }
         public string  Description { get; set; }
-        public Category category { get; set; }
+        public PrestationCategory PrestationCategory { get; set; }
     }
 }

@@ -5,16 +5,16 @@ using ElegantGlamour.Core;
 using ElegantGlamour.Core.Error;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Services;
+using ElegantGlamour.Core.Specifications;
+using ElegantGlamour.Services.Specifications;
 
 namespace ElegantGlamour.Services
 {
     public class PrestationService : IPrestationService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICategoryService _categoryService;
-        public PrestationService(IUnitOfWork unitOfWork, ICategoryService categoryService)
+        public PrestationService(IUnitOfWork unitOfWork)
         {
-            this._categoryService = categoryService;
             this._unitOfWork = unitOfWork;
 
         }
@@ -23,7 +23,7 @@ namespace ElegantGlamour.Services
         {
             try
             {
-                bool isCategoryExist = await _categoryService.IsCategoryIdExist(newPrestation.CategoryId);
+                bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(newPrestation.PrestationCategoryId.ToString());
                 if (!isCategoryExist)
                     throw new CategoryDoesNotExistException();
                 await _unitOfWork.Prestations.AddAsync(newPrestation);
@@ -36,6 +36,11 @@ namespace ElegantGlamour.Services
                 throw ex;
             }
 
+        }
+
+        public Task<PrestationCategory> CreatePrestationCategory(PrestationCategory newPrestationCategory)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task DeletePrestation(Prestation prestation)
@@ -53,11 +58,16 @@ namespace ElegantGlamour.Services
 
         }
 
+        public Task DeletePrestationCategory(PrestationCategory prestationCategory)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Prestation>> GetAllPrestations()
         {
             try
             {
-                return await _unitOfWork.Prestations.GetAllPrestationsWithCategoryAsync();
+                return await _unitOfWork.Prestations.GetPrestationsAsync();
             }
             catch (Exception)
             {
@@ -66,17 +76,34 @@ namespace ElegantGlamour.Services
 
         }
 
+        public async Task<IEnumerable<Prestation>> GetAllPrestations(PrestationSpecParams specParam)
+        {
+            var spec = new PrestationsWithCategoriesSpecification(specParam);
+
+            return await _unitOfWork.Prestations.ListAsync(spec);
+        }
+
         public async Task<Prestation> GetPrestationById(int id)
         {
             try
             {
-                return await _unitOfWork.Prestations.GetPrestationWithCategoryByIdAsync(id);
+                return await _unitOfWork.Prestations.GetPrestationByIdAsync(id);
 
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        public Task<PrestationCategory> GetPrestationCategoryById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IReadOnlyList<PrestationCategory>> GettAllPrestationCategories()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task UpdatePrestation(Prestation prestationToBeUpdate, Prestation prestation)
@@ -88,11 +115,11 @@ namespace ElegantGlamour.Services
                 prestationToBeUpdate.Price = prestation.Price;
                 prestationToBeUpdate.Title = prestation.Title;
 
-                bool isCategoryExist = await _categoryService.IsCategoryIdExist(prestation.CategoryId);
+                bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(prestationToBeUpdate.PrestationCategoryId.ToString());
                 if (!isCategoryExist)
                     throw new CategoryDoesNotExistException();
 
-                prestationToBeUpdate.Category = prestation.Category;
+                prestationToBeUpdate.PrestationCategory = prestation.PrestationCategory;
 
                 await _unitOfWork.CommitAsync();
             }
@@ -100,6 +127,11 @@ namespace ElegantGlamour.Services
             {
                 throw ex;
             }
+        }
+
+        public Task<PrestationCategory> UpdatePrestationCategory(PrestationCategory prestationCategoryToBeUpdate, PrestationCategory prestationCategory)
+        {
+            throw new NotImplementedException();
         }
     }
 }

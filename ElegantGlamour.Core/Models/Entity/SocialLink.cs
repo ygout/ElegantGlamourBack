@@ -1,4 +1,3 @@
-using ElegantGlamour.Core.Models.Entity;
 
 namespace ElegantGlamour.Core.Models
 {

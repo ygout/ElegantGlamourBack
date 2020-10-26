@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using ElegantGlamour.Core.Specifications;
 
-namespace ElegantGlamour.Core.Specifications
+namespace ElegantGlamour.Services.Specifications
 {
     public class BaseSpecification<T> : ISpecification<T>
     {

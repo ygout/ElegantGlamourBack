@@ -9,7 +9,6 @@ namespace ElegantGlamour.Data
     {
         private readonly ElegantGlamourDbContext _context;
         private PrestationRepository _prestationRepository;
-        private CategoryRepository _categoryRepository;
 
         public UnitOfWork(ElegantGlamourDbContext context)
         {
@@ -17,7 +16,6 @@ namespace ElegantGlamour.Data
         }
         public IPrestationRepository Prestations => _prestationRepository = _prestationRepository ?? new PrestationRepository(_context);
 
-        public ICategoryRepository Categories => _categoryRepository = _categoryRepository ?? new CategoryRepository(_context);
         public IHomePageRepository HomePages => throw new System.NotImplementedException();
 
         public ISocialLinkRepository SocialLinks => throw new System.NotImplementedException();

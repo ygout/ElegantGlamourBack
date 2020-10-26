@@ -1,5 +1,6 @@
 using System;
 using ElegantGlamour.Core.Models;
+using ElegantGlamour.Core.Models.Entity;
 using ElegantGlamour.Data;
 
 namespace ElegantGlamour.Tests.UnitTests
@@ -8,7 +9,7 @@ namespace ElegantGlamour.Tests.UnitTests
     {
         public static void Seed(this ElegantGlamourDbContext dbContext)
         {
-            dbContext.Categories.Add(new Category()
+            dbContext.PrestationCategories.Add(new PrestationCategory()
             {
                 Id = 1,
                 Title = "Maquillage",

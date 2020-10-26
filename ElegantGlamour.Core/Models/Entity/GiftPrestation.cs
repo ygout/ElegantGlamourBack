@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using ElegantGlamour.Core.Models;
-using ElegantGlamour.Core.Models.Entity;
 
 namespace ElegantGlamour.Core.Models
 {
