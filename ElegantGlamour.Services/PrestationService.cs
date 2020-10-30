@@ -87,7 +87,8 @@ namespace ElegantGlamour.Services
         {
             try
             {
-                return await _unitOfWork.Prestations.GetPrestationByIdAsync(id);
+                var spec = new PrestationsWithCategoriesSpecification(id);
+                return await _unitOfWork.Prestations.GetEntityWithSpec(spec);
 
             }
             catch (Exception)
@@ -101,9 +102,9 @@ namespace ElegantGlamour.Services
             throw new NotImplementedException();
         }
 
-        public Task<IReadOnlyList<PrestationCategory>> GettAllPrestationCategories()
+        public async Task<IReadOnlyList<PrestationCategory>> GettAllPrestationCategories(PrestationCategorySpecParams spec)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.Prestations.GetPrestationCategoriesAsync(spec);
         }
 
         public async Task UpdatePrestation(Prestation prestationToBeUpdate, Prestation prestation)

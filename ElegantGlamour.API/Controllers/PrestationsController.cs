@@ -14,6 +14,7 @@ using AutoWrapper.Wrappers;
 using ElegantGlamour.Core.Error;
 using ElegantGlamour.Api.Swagger;
 using Swashbuckle.AspNetCore.Annotations;
+using ElegantGlamour.Core.Specifications;
 
 namespace ElegantGlamour.API.Controllers
 {
@@ -115,11 +116,11 @@ namespace ElegantGlamour.API.Controllers
         [HttpGet("")]
         [ProducesResponseType(typeof(ResponseWrapper<IEnumerable<GetPrestationDto>>), Status200OK)]
 
-        public async Task<IEnumerable<GetPrestationDto>> GetPrestations()
+        public async Task<IEnumerable<GetPrestationDto>> GetPrestations([FromQuery]PrestationSpecParams spec)
         {
             try
             {
-                IEnumerable<Prestation> prestations = await this._prestationService.GetAllPrestations();
+                IEnumerable<Prestation> prestations = await this._prestationService.GetAllPrestations(spec);
                 IEnumerable<GetPrestationDto> prestationsDtos = this._mapper.Map<IEnumerable<Prestation>, IEnumerable<GetPrestationDto>>(prestations);
 
                 return prestationsDtos;
