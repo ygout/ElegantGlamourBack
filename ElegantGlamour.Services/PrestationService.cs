@@ -97,13 +97,15 @@ namespace ElegantGlamour.Services
             }
         }
 
-        public Task<PrestationCategory> GetPrestationCategoryById(int id)
+        public async Task<PrestationCategory> GetPrestationCategoryById(int id)
         {
-            throw new NotImplementedException();
+            var spec = new PrestationsCategorySpecification(id);
+            return await _unitOfWork.Prestations.GetPrestationCategoryAsync(spec);
         }
 
-        public async Task<IReadOnlyList<PrestationCategory>> GettAllPrestationCategories(PrestationCategorySpecParams spec)
+        public async Task<IReadOnlyList<PrestationCategory>> GettAllPrestationCategories(PrestationCategorySpecParams specParams)
         {
+            var spec = new PrestationsCategorySpecification(specParams);
             return await _unitOfWork.Prestations.GetPrestationCategoriesAsync(spec);
         }
 
