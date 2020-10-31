@@ -23,7 +23,8 @@ namespace ElegantGlamour.Services
         {
             try
             {
-                bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(newPrestation.PrestationCategoryId.ToString());
+                var spec = new IsPrestationCategoryExistSpecification(newPrestation.Id.ToString());
+                bool isCategoryExist = await _unitOfWork.Prestations.IsExistAsync(spec);
                 if (!isCategoryExist)
                     throw new CategoryDoesNotExistException();
                 await _unitOfWork.Prestations.AddAsync(newPrestation);
@@ -35,7 +36,6 @@ namespace ElegantGlamour.Services
             {
                 throw ex;
             }
-
         }
 
         public Task<PrestationCategory> CreatePrestationCategory(PrestationCategory newPrestationCategory)
