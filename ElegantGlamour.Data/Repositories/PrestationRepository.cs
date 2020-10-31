@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Core.Repositories;
 using System;
+using ElegantGlamour.Core.Specifications;
 
 namespace ElegantGlamour.Data.Repositories
 {
@@ -31,11 +32,15 @@ namespace ElegantGlamour.Data.Repositories
 
         }
 
-        public async Task<IReadOnlyList<PrestationCategory>> GetPrestationCategoriesAsync()
+        public async Task<IReadOnlyList<PrestationCategory>> GetPrestationCategoriesAsync(ISpecification<PrestationCategory> spec)
         {
-            return await ElegantGlamourDbContext.PrestationCategories.ToListAsync();
+            return await ApplySpecificationPrestationCategory(spec).ToListAsync();
         }
-
+    
+        public async Task<PrestationCategory> GetPrestationCategoryAsync(ISpecification<PrestationCategory> spec)
+        {
+            return await ApplySpecificationPrestationCategory(spec).FirstOrDefaultAsync();
+        }
         public async Task<bool> IsPrestationCategoryExistAsync(string id = null, string name = null)
         {
             var isExist = false;
@@ -47,6 +52,10 @@ namespace ElegantGlamour.Data.Repositories
                 isExist = true;
 
             return isExist;
+        }
+        private IQueryable<PrestationCategory> ApplySpecificationPrestationCategory(ISpecification<PrestationCategory> spec)
+        {
+            return SpecificationEvaluator<PrestationCategory>.GetQuery(ElegantGlamourDbContext.PrestationCategories.AsQueryable(), spec);
         }
     }
 }
