@@ -49,5 +49,15 @@ namespace ElegantGlamour.Data.Repositories
         {
             return SpecificationEvaluator<PrestationCategory>.GetQuery(ElegantGlamourDbContext.PrestationCategories.AsQueryable(), spec);
         }
+
+        public async Task AddPrestationCategoryAsync(PrestationCategory prestationCategory)
+        {
+            await ElegantGlamourDbContext.PrestationCategories.AddAsync(prestationCategory);
+        }
+
+        public void DeletePrestationCategory(PrestationCategory prestationCategory)
+        {
+            ElegantGlamourDbContext.PrestationCategories.Remove(prestationCategory);
+        }
     }
 }

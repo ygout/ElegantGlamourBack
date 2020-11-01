@@ -178,14 +178,14 @@ namespace ElegantGlamour.API.Controllers
         }
 
         [HttpGet("categories")]
-        [ProducesResponseType(typeof(ResponseWrapper<IEnumerable<GetCategoryDto>>), Status200OK)]
+        [ProducesResponseType(typeof(ResponseWrapper<IEnumerable<GetPrestationCategoryDto>>), Status200OK)]
 
-        public async Task<IEnumerable<GetCategoryDto>> GetCategories()
+        public async Task<IEnumerable<GetPrestationCategoryDto>> GetCategories([FromQuery]PrestationCategorySpecParams spec)
         {
             try
             {
-                IEnumerable<Category> categories = await this._categoryService.GetAllCategories();
-                IEnumerable<GetCategoryDto> categoriesDto = this._mapper.Map<IEnumerable<Category>, IEnumerable<GetCategoryDto>>(categories);
+                IEnumerable<PrestationCategory> categories = await this._prestationService.GettAllPrestationCategories(spec);
+                IEnumerable<GetPrestationCategoryDto> categoriesDto = this._mapper.Map<IEnumerable<PrestationCategory>, IEnumerable<GetPrestationCategoryDto>>(categories);
 
                 return categoriesDto;
             }
@@ -198,14 +198,14 @@ namespace ElegantGlamour.API.Controllers
         }
 
         [HttpGet("categories/{id}")]
-        [ProducesResponseType(typeof(ResponseWrapper<GetCategoryDto>), Status200OK)]
+        [ProducesResponseType(typeof(ResponseWrapper<GetPrestationCategoryDto>), Status200OK)]
 
-        public async Task<GetCategoryDto> GetCategoryById(int id)
+        public async Task<GetPrestationCategoryDto> GetCategoryById(int id)
         {
             try
             {
-                var category = await this._categoryService.GetCategoryById(id);
-                var categoryDto = this._mapper.Map<Category, GetCategoryDto>(category);
+                var category = await this._prestationService.GetPrestationCategoryById(id);
+                var categoryDto = this._mapper.Map<PrestationCategory, GetPrestationCategoryDto>(category);
                 if (categoryDto == null)
                     throw new ApiException($"La categorie avec pour id: {id} n'existe pas", Status404NotFound);
 
@@ -219,8 +219,8 @@ namespace ElegantGlamour.API.Controllers
         }
 
         [HttpPost("categories")]
-        [ProducesResponseType(typeof(ResponseWrapper<GetCategoryDto>), Status201Created)]
-        public async Task<ApiResponse> CreateCategory([FromBody] AddCategoryDto addCategoryDto)
+        [ProducesResponseType(typeof(ResponseWrapper<GetPrestationCategoryDto>), Status201Created)]
+        public async Task<ApiResponse> CreateCategory([FromBody] AddPrestationCategoryDto addCategoryDto)
         {
             var validator = new AddCategoryDtoValidator();
             try
@@ -230,13 +230,13 @@ namespace ElegantGlamour.API.Controllers
                 if (!validationResult.IsValid)
                     throw new ApiException(validationResult); // this needs refining
 
-                var categoryToCreate = _mapper.Map<AddCategoryDto, Category>(addCategoryDto);
+                var categoryToCreate = _mapper.Map<AddPrestationCategoryDto, PrestationCategory>(addCategoryDto);
 
-                var newCategory = await _categoryService.CreateCategory(categoryToCreate);
+                var newCategory = await _prestationService.CreatePrestationCategory(categoryToCreate);
 
-                var categoryCreated = await _categoryService.GetCategoryById(newCategory.Id);
+                var categoryCreated = await _prestationService.GetPrestationCategoryById(newCategory.Id);
 
-                var getCategoryDto = _mapper.Map<Category, GetCategoryDto>(categoryCreated);
+                var getCategoryDto = _mapper.Map<PrestationCategory, GetPrestationCategoryDto>(categoryCreated);
 
                 return new ApiResponse("La catégorie a été correctement crée", getCategoryDto, Status201Created);
             }
@@ -256,9 +256,9 @@ namespace ElegantGlamour.API.Controllers
         }
 
         [HttpPut("categories/{id}")]
-        [ProducesResponseType(typeof(ResponseWrapper<GetCategoryDto>), Status201Created)]
+        [ProducesResponseType(typeof(ResponseWrapper<GetPrestationCategoryDto>), Status201Created)]
 
-        public async Task<ApiResponse> UpdateCategory(int id, [FromBody] UpdateCategoryDto updateCategoryDto)
+        public async Task<ApiResponse> UpdateCategory(int id, [FromBody] UpdatePrestationCategoryDto updateCategoryDto)
         {
             var validator = new UpdateCategoryDtoValidator();
             try
@@ -268,17 +268,17 @@ namespace ElegantGlamour.API.Controllers
                 if (!validationResult.IsValid)
                     throw new ApiException(validationResult);
 
-                var categoryToBeUpdate = await _categoryService.GetCategoryById(id);
+                var categoryToBeUpdate = await _prestationService.GetPrestationCategoryById(id);
 
                 if (id == 0 || categoryToBeUpdate == null)
                     throw new ApiException("La catégorie n'existe pas", Status404NotFound);
 
-                var category = _mapper.Map<UpdateCategoryDto, Category>(updateCategoryDto);
+                var category = _mapper.Map<UpdatePrestationCategoryDto, PrestationCategory>(updateCategoryDto);
 
-                await _categoryService.UpdateCategory(categoryToBeUpdate, category);
+                await _prestationService.UpdatePrestationCategory(categoryToBeUpdate, category);
 
-                var updatedCategory = await _categoryService.GetCategoryById(id);
-                var updatedCategoryDto = _mapper.Map<Category, GetCategoryDto>(updatedCategory);
+                var updatedCategory = await _prestationService.GetPrestationCategoryById(id);
+                var updatedCategoryDto = _mapper.Map<PrestationCategory, GetPrestationCategoryDto>(updatedCategory);
 
                 return new ApiResponse($"La catégorie avec pour id: {id} a été correctement modifié", updatedCategoryDto, Status201Created);
             }
@@ -303,12 +303,12 @@ namespace ElegantGlamour.API.Controllers
         {
             try
             {
-                var categoryToBeDeleted = await _categoryService.GetCategoryById(id);
+                var categoryToBeDeleted = await _prestationService.GetPrestationCategoryById(id);
 
                 if (categoryToBeDeleted == null)
                     throw new ApiException("La catégorie n'existe pas", Status404NotFound);
 
-                await _categoryService.DeleteCategory(categoryToBeDeleted);
+                await _prestationService.DeletePrestationCategory(categoryToBeDeleted);
 
                 return new ApiResponse($"La catégorie avec pour id: {id} a été correctement supprimé.", true);
             }

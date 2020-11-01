@@ -42,11 +42,15 @@ namespace ElegantGlamour.Services
         {
             try
             {
-                
+                await _unitOfWork.Prestations.AddPrestationCategoryAsync(newPrestationCategory);
+                await _unitOfWork.CommitAsync();
+
+                return newPrestationCategory;
+
             }
-            catch (System.Exception)
+            catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -66,9 +70,18 @@ namespace ElegantGlamour.Services
 
         }
 
-        public Task DeletePrestationCategory(PrestationCategory prestationCategory)
+        public async Task DeletePrestationCategory(PrestationCategory prestationCategory)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _unitOfWork.Prestations.DeletePrestationCategory(prestationCategory);
+
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<Prestation>> GetAllPrestations()
@@ -141,9 +154,27 @@ namespace ElegantGlamour.Services
             }
         }
 
-        public Task<PrestationCategory> UpdatePrestationCategory(PrestationCategory prestationCategoryToBeUpdate, PrestationCategory prestationCategory)
+        public async Task<PrestationCategory> UpdatePrestationCategory(PrestationCategory prestationCategoryToBeUpdate, PrestationCategory prestationCategory)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var spec = new IsPrestationCategoryExistSpecification(name: prestationCategoryToBeUpdate.Name.ToString());
+
+                bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(spec);
+
+                if (!isCategoryExist)
+                    throw new CategoryDoesNotExistException();
+
+                prestationCategoryToBeUpdate.Name = prestationCategory.Name;
+
+                await _unitOfWork.CommitAsync();
+
+                return prestationCategoryToBeUpdate;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

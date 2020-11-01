@@ -16,7 +16,6 @@ namespace ElegantGlamour.Core.Services
         Task<PrestationCategory> CreatePrestationCategory(PrestationCategory newPrestationCategory);
         Task<PrestationCategory> UpdatePrestationCategory(PrestationCategory prestationCategoryToBeUpdate, PrestationCategory prestationCategory);
         Task DeletePrestationCategory(PrestationCategory prestationCategory);
-
         Task<IReadOnlyList<PrestationCategory>> GettAllPrestationCategories(PrestationCategorySpecParams spec);
         Task<PrestationCategory> GetPrestationCategoryById(int id);
 

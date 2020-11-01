@@ -12,6 +12,7 @@ namespace ElegantGlamour.Core.Repositories
         Task<PrestationCategory> GetPrestationCategoryAsync(ISpecification<PrestationCategory> spec);
         Task<IReadOnlyList<PrestationCategory>> GetPrestationCategoriesAsync(ISpecification<PrestationCategory> spec);
         Task<bool> IsPrestationCategoryExistAsync(ISpecification<PrestationCategory> spec);
-        Task<PrestationCategory> AddPrestationCategory(PrestationCategory prestationCategory);
+        Task AddPrestationCategoryAsync(PrestationCategory prestationCategory);
+        void DeletePrestationCategory(PrestationCategory prestationCategory);
     }
 }

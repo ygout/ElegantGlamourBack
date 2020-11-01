@@ -37,8 +37,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCategoryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCategoryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
