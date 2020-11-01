@@ -9,9 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace ElegantGlamour.Data
 {
-    public class ElegantGlamourContextSeed
+    public static class ElegantGlamourContextSeed
     {
-        public static async Task SeedAsync(ElegantGlamourDbContext context, ILoggerFactory loggerFactory)
+        public static async Task SeedAsync(this ElegantGlamourDbContext context, ILoggerFactory loggerFactory)
         {
             try
             {

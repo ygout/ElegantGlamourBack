@@ -10,7 +10,7 @@ namespace ElegantGlamour.Tests.UnitTests
 {
     public static class DbContextMocker
     {
-        public static ElegantGlamourDbContext GetElegantGlamourDbContext (string dbName)
+        public static ElegantGlamourDbContext GetElegantGlamourDbContext(string dbName)
         {
             // Create options for DbContext instance
             var options = new DbContextOptionsBuilder<ElegantGlamourDbContext>()
@@ -21,7 +21,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var dbContext = new ElegantGlamourDbContext(options);
 
             // Add entities in memory
-            dbContext.Seed();
+            dbContext.SeedAsync();
 
             return dbContext;
         }
