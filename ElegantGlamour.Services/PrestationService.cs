@@ -24,7 +24,7 @@ namespace ElegantGlamour.Services
             try
             {
                 var spec = new IsPrestationCategoryExistSpecification(newPrestation.Id.ToString());
-                bool isCategoryExist = await _unitOfWork.Prestations.IsExistAsync(spec);
+                bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(spec);
                 if (!isCategoryExist)
                     throw new CategoryDoesNotExistException();
                 await _unitOfWork.Prestations.AddAsync(newPrestation);
@@ -38,9 +38,17 @@ namespace ElegantGlamour.Services
             }
         }
 
-        public Task<PrestationCategory> CreatePrestationCategory(PrestationCategory newPrestationCategory)
+        public async Task<PrestationCategory> CreatePrestationCategory(PrestationCategory newPrestationCategory)
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
 
         public async Task DeletePrestation(Prestation prestation)
@@ -117,8 +125,9 @@ namespace ElegantGlamour.Services
                 prestationToBeUpdate.Duration = prestation.Duration;
                 prestationToBeUpdate.Price = prestation.Price;
                 prestationToBeUpdate.Title = prestation.Title;
+                var spec = new IsPrestationCategoryExistSpecification(prestationToBeUpdate.PrestationCategoryId.ToString());
 
-                bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(prestationToBeUpdate.PrestationCategoryId.ToString());
+                bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(spec);
                 if (!isCategoryExist)
                     throw new CategoryDoesNotExistException();
 

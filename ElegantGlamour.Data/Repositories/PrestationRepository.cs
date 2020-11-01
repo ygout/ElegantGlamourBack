@@ -36,22 +36,14 @@ namespace ElegantGlamour.Data.Repositories
         {
             return await ApplySpecificationPrestationCategory(spec).ToListAsync();
         }
-    
+
         public async Task<PrestationCategory> GetPrestationCategoryAsync(ISpecification<PrestationCategory> spec)
         {
             return await ApplySpecificationPrestationCategory(spec).FirstOrDefaultAsync();
         }
-        public async Task<bool> IsPrestationCategoryExistAsync(string id = null, string name = null)
+        public async Task<bool> IsPrestationCategoryExistAsync(ISpecification<PrestationCategory> spec)
         {
-            var isExist = false;
-
-            if (!string.IsNullOrEmpty(id) || await ElegantGlamourDbContext.PrestationCategories.AnyAsync(x => x.Id == Int32.Parse(id)))
-                isExist = true;
-            
-            if(!string.IsNullOrEmpty(name) || await ElegantGlamourDbContext.PrestationCategories.AnyAsync(x => x.Name == name))
-                isExist = true;
-
-            return isExist;
+            return await ApplySpecificationPrestationCategory(spec).AnyAsync();
         }
         private IQueryable<PrestationCategory> ApplySpecificationPrestationCategory(ISpecification<PrestationCategory> spec)
         {
