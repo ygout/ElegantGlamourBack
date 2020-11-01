@@ -1,108 +1,108 @@
-using System;
-using ElegantGlamour.Core.Models;
-using ElegantGlamour.Data;
+// using System;
+// using ElegantGlamour.Core.Models;
+// using ElegantGlamour.Data;
 
-namespace ElegantGlamour.Tests.UnitTests
-{
-    public static class DbContextExtension
-    {
-        public static void Seed(this ElegantGlamourDbContext dbContext)
-        {
-            dbContext.PrestationCategories.Add(new PrestationCategory()
-            {
-                Id = 1,
-                Title = "Maquillage",
-            });
+// namespace ElegantGlamour.Tests.UnitTests
+// {
+//     public static class DbContextExtension
+//     {
+// //         public static void Seed(this ElegantGlamourDbContext dbContext)
+// //         {
+// //             dbContext.PrestationCategories.Add(new PrestationCategory()
+// //             {
+// //                 Id = 1,
+// //                 Title = "Maquillage",
+// //             });
 
-            dbContext.Categories.Add(new Category()
-            {
-                Id = 2,
-                Title = "Soins",
-            });
+// //             dbContext.Categories.Add(new Category()
+// //             {
+// //                 Id = 2,
+// //                 Title = "Soins",
+// //             });
 
-            dbContext.Categories.Add(new Category()
-            {
-                Id = 3,
-                Title = "Massage",
-            });
+// //             dbContext.Categories.Add(new Category()
+// //             {
+// //                 Id = 3,
+// //                 Title = "Massage",
+// //             });
 
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 1,
-                Title = "Prestation1",
-                Description = "ceci est la pr�station num�ro 1",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 1,
-            });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 1,
+// //                 Title = "Prestation1",
+// //                 Description = "ceci est la pr�station num�ro 1",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 1,
+// //             });
 
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 2,
-                Title = "Prestation2",
-                Description = "ceci est la pr�station num�ro 2",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 2,
-            });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 2,
+// //                 Title = "Prestation2",
+// //                 Description = "ceci est la pr�station num�ro 2",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 2,
+// //             });
 
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 3,
-                Title = "Prestation3",
-                Description = "ceci est la pr�station num�ro 3",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 3,
-            });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 3,
+// //                 Title = "Prestation3",
+// //                 Description = "ceci est la pr�station num�ro 3",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 3,
+// //             });
 
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 4,
-                Title = "Prestation1",
-                Description = "ceci est la pr�station num�ro 4",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 1,
-            });
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 5,
-                Title = "Prestation1",
-                Description = "ceci est la pr�station num�ro 5",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 1,
-            });
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 6,
-                Title = "Prestation1",
-                Description = "ceci est la pr�station num�ro 6",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 2,
-            });
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 7,
-                Title = "Prestation1",
-                Description = "ceci est la pr�station num�ro 7",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 2,
-            });
-            dbContext.Prestations.Add(new Prestation()
-            {
-                Id = 8,
-                Title = "Prestation1",
-                Description = "ceci est la pr�station num�ro 8",
-                Price = 30,
-                Duration = 45,
-                CategoryId = 3,
-            });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 4,
+// //                 Title = "Prestation1",
+// //                 Description = "ceci est la pr�station num�ro 4",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 1,
+// //             });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 5,
+// //                 Title = "Prestation1",
+// //                 Description = "ceci est la pr�station num�ro 5",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 1,
+// //             });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 6,
+// //                 Title = "Prestation1",
+// //                 Description = "ceci est la pr�station num�ro 6",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 2,
+// //             });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 7,
+// //                 Title = "Prestation1",
+// //                 Description = "ceci est la pr�station num�ro 7",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 2,
+// //             });
+// //             dbContext.Prestations.Add(new Prestation()
+// //             {
+// //                 Id = 8,
+// //                 Title = "Prestation1",
+// //                 Description = "ceci est la pr�station num�ro 8",
+// //                 Price = 30,
+// //                 Duration = 45,
+// //                 CategoryId = 3,
+// //             });
 
-            dbContext.SaveChanges();
-        }
-    }
-}
+// //             dbContext.SaveChanges();
+// //         }
+// //     }
+// // }

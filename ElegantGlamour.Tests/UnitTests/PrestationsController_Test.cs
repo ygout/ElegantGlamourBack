@@ -4,7 +4,6 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Data;
-using ElegantGlamour.Api.Controllers;
 using Xunit;
 using ElegantGlamour.Services;
 using AutoMapper;

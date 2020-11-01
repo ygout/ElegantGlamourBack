@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using AutoWrapper;
 using ElegantGlamour.API.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace ElegantGlamour.Api
 {
