@@ -17,6 +17,8 @@ using ElegantGlamour.Api.Dtos;
 using System.Threading.Tasks;
 using ElegantGlamour.Core.Error;
 using ElegantGlamour.API.Controllers;
+using ElegantGlamour.Services.Specifications;
+using ElegantGlamour.Core.Specifications;
 
 namespace ElegantGlamour.Tests.UnitTests
 {
@@ -71,8 +73,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCategoryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCategoryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -106,8 +107,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCategoryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCategoryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -115,7 +115,8 @@ namespace ElegantGlamour.Tests.UnitTests
             #endregion
 
             #region Act
-            var response = await controller.GetPrestations();
+            var specParams = new PrestationSpecParams();
+            var response = await controller.GetPrestations(specParams);
 
             dbContext.Dispose();
             #endregion
@@ -140,8 +141,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -153,7 +153,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Description = "Ceci est un test prestation",
                 Price = 10,
                 Duration = 60,
-                CategoryId = 1
+                PrestationCategoryId = 1
             };
             #region Act
             var response = await controller.CreatePrestation(addPrestation);
@@ -182,8 +182,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -195,7 +194,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Description = "Ceci est un test prestation",
                 Price = 10,
                 Duration = 60,
-                CategoryId = 89
+                PrestationCategoryId = 89
             };
             #region Act
 
@@ -226,8 +225,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -239,7 +237,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Description = "Test",
                 Price = 10,
                 Duration = 60,
-                CategoryId = 89
+                PrestationCategoryId = 89
             };
             #region Act
 
@@ -269,8 +267,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -282,7 +279,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Description = "",
                 Price = 10,
                 Duration = 60,
-                CategoryId = 89
+                PrestationCategoryId = 89
             };
             #region Act
 
@@ -313,8 +310,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -325,7 +321,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Title = "Test",
                 Description = "Test",
                 Duration = 60,
-                CategoryId = 89
+                PrestationCategoryId = 89
             };
             #region Act
 
@@ -356,8 +352,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -368,7 +363,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Title = "Test",
                 Description = "Test",
                 Duration = 0,
-                CategoryId = 89,
+                PrestationCategoryId = 89,
                 Price = 50
             };
             #region Act
@@ -400,8 +395,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -411,7 +405,7 @@ namespace ElegantGlamour.Tests.UnitTests
             {
                 Title = "Test",
                 Description = "Test",
-                CategoryId = 89,
+                PrestationCategoryId = 89,
                 Price = 50
             };
             #region Act
@@ -442,8 +436,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -485,8 +478,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -528,8 +520,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -540,7 +531,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Title = "Test",
                 Price = 50,
                 Duration = 50,
-                CategoryId = 1
+                PrestationCategoryId = 1
             };
             int idPrestation = 1;
             #region Act
@@ -573,8 +564,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -585,7 +575,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Price = 50,
                 Description = "this is description",
                 Duration = 50,
-                CategoryId = 1
+                PrestationCategoryId = 1
             };
             int idPrestation = 1;
             #region Act
@@ -616,8 +606,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -628,7 +617,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Description = "this is description",
                 Duration = 50,
                 Title = "test title",
-                CategoryId = 1
+                PrestationCategoryId = 1
             };
             int idPrestation = 1;
             #region Act
@@ -659,8 +648,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -671,7 +659,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Description = "this is description",
                 Price = 50,
                 Title = "test title",
-                CategoryId = 1
+                PrestationCategoryId = 1
             };
             int idPrestation = 1;
             #region Act
@@ -703,8 +691,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -716,7 +703,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Price = 50,
                 Title = "test title",
                 Duration = 60,
-                CategoryId = 8544
+                PrestationCategoryId = 8544
             };
             int idPrestation = 1;
             #region Act
@@ -748,8 +735,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -761,7 +747,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Price = 50,
                 Title = "test title",
                 Duration = 60,
-                CategoryId = 1
+                PrestationCategoryId = 1
             };
             int idPrestation = 8787887;
             #region Act
@@ -793,8 +779,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -806,7 +791,7 @@ namespace ElegantGlamour.Tests.UnitTests
                 Price = 60,
                 Title = "test title updated",
                 Duration = 120,
-                CategoryId = 1
+                PrestationCategoryId = 1
             };
             int idPrestation = 1;
 
@@ -837,8 +822,7 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
@@ -874,15 +858,14 @@ namespace ElegantGlamour.Tests.UnitTests
             var mapper = new Mapper(config);
 
             var mockUnitOfWork = new UnitOfWork(dbContext);
-            var mockCateogryService = new CategoryService(mockUnitOfWork);
-            var mockPrestationService = new PrestationService(mockUnitOfWork, mockCateogryService);
+            var mockPrestationService = new PrestationService(mockUnitOfWork);
 
             var mockLogger = Mock.Of<ILogger<PrestationsController>>();
 
             var controller = new PrestationsController(mockPrestationService, mapper, mockLogger);
             #endregion
         
-            int idPrestation = 1;
+            int idPrestation = 1500;
 
             #region Act
             var apiException = await Assert.ThrowsAsync<ApiException>(() => controller.DeletePrestation(idPrestation));

@@ -23,7 +23,7 @@ namespace ElegantGlamour.Tests.UnitTests
             
             ILoggerFactory loggerFactory = new LoggerFactory();
             // Add entities in memory
-            dbContext.SeedAsync(loggerFactory);
+            dbContext.Seed(loggerFactory);
 
             return dbContext;
         }

@@ -23,7 +23,7 @@ namespace ElegantGlamour.Services
         {
             try
             {
-                var spec = new IsPrestationCategoryExistSpecification(newPrestation.Id.ToString());
+                var spec = new IsPrestationCategoryExistSpecification(id: newPrestation.PrestationCategoryId.ToString());
                 bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(spec);
                 if (!isCategoryExist)
                     throw new CategoryDoesNotExistException();
@@ -130,21 +130,21 @@ namespace ElegantGlamour.Services
             return await _unitOfWork.Prestations.GetPrestationCategoriesAsync(spec);
         }
 
-        public async Task UpdatePrestation(Prestation prestationToBeUpdate, Prestation prestation)
+        public async Task UpdatePrestation(Prestation prestationToBeUpdate, Prestation newPrestation)
         {
             try
             {
-                prestationToBeUpdate.Description = prestation.Description;
-                prestationToBeUpdate.Duration = prestation.Duration;
-                prestationToBeUpdate.Price = prestation.Price;
-                prestationToBeUpdate.Title = prestation.Title;
-                var spec = new IsPrestationCategoryExistSpecification(prestationToBeUpdate.PrestationCategoryId.ToString());
+                prestationToBeUpdate.Description = newPrestation.Description;
+                prestationToBeUpdate.Duration = newPrestation.Duration;
+                prestationToBeUpdate.Price = newPrestation.Price;
+                prestationToBeUpdate.Title = newPrestation.Title;
+                var spec = new IsPrestationCategoryExistSpecification(newPrestation.PrestationCategoryId.ToString());
 
                 bool isCategoryExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(spec);
                 if (!isCategoryExist)
                     throw new CategoryDoesNotExistException();
 
-                prestationToBeUpdate.PrestationCategory = prestation.PrestationCategory;
+                prestationToBeUpdate.PrestationCategory = newPrestation.PrestationCategory;
 
                 await _unitOfWork.CommitAsync();
             }
