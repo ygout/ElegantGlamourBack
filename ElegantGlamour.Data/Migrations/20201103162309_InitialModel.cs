@@ -8,16 +8,16 @@ namespace ElegantGlamour.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "PrestationCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_PrestationCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -26,27 +26,27 @@ namespace ElegantGlamour.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Duration = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
+                    PrestationCategoryId = table.Column<int>(nullable: false),
                     Price = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Prestations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Prestations_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        name: "FK_Prestations_PrestationCategories_PrestationCategoryId",
+                        column: x => x.PrestationCategoryId,
+                        principalTable: "PrestationCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Prestations_CategoryId",
+                name: "IX_Prestations_PrestationCategoryId",
                 table: "Prestations",
-                column: "CategoryId");
+                column: "PrestationCategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -55,7 +55,7 @@ namespace ElegantGlamour.Data.Migrations
                 name: "Prestations");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "PrestationCategories");
         }
     }
 }
