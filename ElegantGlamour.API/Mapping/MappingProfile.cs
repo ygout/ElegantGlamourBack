@@ -9,7 +9,7 @@ namespace ElegantGlamour.Api.Mapping
         public MappingProfile()
         {
             // Entity to Dto
-            CreateMap<PrestationCategory, GetPrestationDto>();
+            CreateMap<PrestationCategory, GetPrestationCategoryDto>();
             CreateMap<Prestation, GetPrestationDto>()
             .ForMember(d => d.PrestationCategory, o => o.MapFrom(s => s.PrestationCategory.Id));
 

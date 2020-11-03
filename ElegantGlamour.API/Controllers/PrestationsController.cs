@@ -180,7 +180,7 @@ namespace ElegantGlamour.API.Controllers
         [HttpGet("categories")]
         [ProducesResponseType(typeof(ResponseWrapper<IEnumerable<GetPrestationCategoryDto>>), Status200OK)]
 
-        public async Task<IEnumerable<GetPrestationCategoryDto>> GetCategories([FromQuery]PrestationCategorySpecParams spec)
+        public async Task<IEnumerable<GetPrestationCategoryDto>> GetPrestationCategories([FromQuery]PrestationCategorySpecParams spec)
         {
             try
             {
@@ -200,7 +200,7 @@ namespace ElegantGlamour.API.Controllers
         [HttpGet("categories/{id}")]
         [ProducesResponseType(typeof(ResponseWrapper<GetPrestationCategoryDto>), Status200OK)]
 
-        public async Task<GetPrestationCategoryDto> GetCategoryById(int id)
+        public async Task<GetPrestationCategoryDto> GetPrestationCategoryById(int id)
         {
             try
             {
@@ -220,7 +220,7 @@ namespace ElegantGlamour.API.Controllers
 
         [HttpPost("categories")]
         [ProducesResponseType(typeof(ResponseWrapper<GetPrestationCategoryDto>), Status201Created)]
-        public async Task<ApiResponse> CreateCategory([FromBody] AddPrestationCategoryDto addCategoryDto)
+        public async Task<ApiResponse> CreatePrestationCategory([FromBody] AddPrestationCategoryDto addCategoryDto)
         {
             var validator = new AddCategoryDtoValidator();
             try
@@ -258,7 +258,7 @@ namespace ElegantGlamour.API.Controllers
         [HttpPut("categories/{id}")]
         [ProducesResponseType(typeof(ResponseWrapper<GetPrestationCategoryDto>), Status201Created)]
 
-        public async Task<ApiResponse> UpdateCategory(int id, [FromBody] UpdatePrestationCategoryDto updateCategoryDto)
+        public async Task<ApiResponse> UpdatePrestationCategory(int id, [FromBody] UpdatePrestationCategoryDto updateCategoryDto)
         {
             var validator = new UpdateCategoryDtoValidator();
             try
@@ -299,7 +299,7 @@ namespace ElegantGlamour.API.Controllers
         [HttpDelete("categories/{id}")]
         [SwaggerResponse(Status200OK, "La catégorie avec pour id: {id} a été correctement supprimé", typeof(ResponseWrapper<bool>))]
         // [ProducesResponseType(typeof(ApiException), Status404NotFound)]
-        public async Task<ApiResponse> DeleteCategory(int id)
+        public async Task<ApiResponse> DeletePrestationCategory(int id)
         {
             try
             {

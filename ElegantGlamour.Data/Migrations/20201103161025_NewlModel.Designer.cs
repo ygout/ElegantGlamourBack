@@ -3,14 +3,16 @@ using ElegantGlamour.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ElegantGlamour.Data.Migrations
 {
     [DbContext(typeof(ElegantGlamourDbContext))]
-    partial class ElegantGlamourDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103161025_NewlModel")]
+    partial class NewlModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

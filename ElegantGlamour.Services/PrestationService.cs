@@ -42,6 +42,10 @@ namespace ElegantGlamour.Services
         {
             try
             {
+                var spec = new IsPrestationCategoryExistSpecification(name: newPrestationCategory.Name);
+                bool isCategoryAlreadyExist = await _unitOfWork.Prestations.IsPrestationCategoryExistAsync(spec);
+                if (isCategoryAlreadyExist)
+                    throw new CategoryAlreadyExistException();
                 await _unitOfWork.Prestations.AddPrestationCategoryAsync(newPrestationCategory);
                 await _unitOfWork.CommitAsync();
 
