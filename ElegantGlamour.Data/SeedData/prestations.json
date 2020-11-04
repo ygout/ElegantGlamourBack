@@ -1,10 +1,58 @@
 [
     {
         "Id": 1,
-        "Title": "",
-        "Description": "",
-        "Price": 0,
-        "Duration": 0,
+        "Title": "Prestation 1",
+        "Description": "Description prestation 1",
+        "Price": 50,
+        "Duration": 40,
         "PrestationCategoryId": 1
+    },
+    {
+        "Id": 2,
+        "Title": "Prestation 2",
+        "Description": "Description prestation 2",
+        "Price": 50,
+        "Duration": 30,
+        "PrestationCategoryId": 1
+    },
+    {
+        "Id": 3,
+        "Title": "Prestation 3",
+        "Description": "Description prestation 3",
+        "Price": 15,
+        "Duration": 20,
+        "PrestationCategoryId": 2
+    },
+    {
+        "Id": 4,
+        "Title": "Prestation 4",
+        "Description": "Description prestation 4",
+        "Price": 60,
+        "Duration": 30,
+        "PrestationCategoryId": 2
+    },
+    {
+        "Id": 5,
+        "Title": "Prestation 5",
+        "Description": "Description prestation 5",
+        "Price": 40,
+        "Duration": 60,
+        "PrestationCategoryId": 2
+    },
+    {
+        "Id": 6,
+        "Title": "Prestation 6",
+        "Description": "Description prestation 6",
+        "Price": 120,
+        "Duration": 30,
+        "PrestationCategoryId": 3
+    },
+    {
+        "Id": 7,
+        "Title": "Prestation 7",
+        "Description": "Description prestation 7",
+        "Price": 50,
+        "Duration": 120,
+        "PrestationCategoryId": 3
     }
 ]
