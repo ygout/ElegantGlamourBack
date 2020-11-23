@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
+  "version": 1, 
   "newProjectRoot": "projects",
   "projects": {
-    "AdminApp": {
+    "WebAdmin": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/AdminApp",
+            "outputPath": "dist/WebAdmin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,19 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
-              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
-              "node_modules/animate.css/animate.css",
               "src/styles.scss"
-          ],
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js"
-            ]
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -76,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "AdminApp:build"
+            "browserTarget": "WebAdmin:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "AdminApp:build:production"
+              "browserTarget": "WebAdmin:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AdminApp:build"
+            "browserTarget": "WebAdmin:build"
           }
         },
         "test": {
@@ -124,15 +114,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "AdminApp:serve"
+            "devServerTarget": "WebAdmin:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "AdminApp:serve:production"
+              "devServerTarget": "WebAdmin:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "AdminApp"
+  "defaultProject": "WebAdmin"
 }
