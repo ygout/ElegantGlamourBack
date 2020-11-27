@@ -1,6 +1,8 @@
 using AutoMapper;
 using ElegantGlamour.Core.Models;
 using ElegantGlamour.Api.Dtos;
+using ElegantGlamour.Core.Models.Entity.Auth;
+using ElegantGlamour.Api.Dtos.User;
 
 namespace ElegantGlamour.Api.Mapping
 {
@@ -19,6 +21,8 @@ namespace ElegantGlamour.Api.Mapping
             
             CreateMap<AddPrestationDto, Prestation>();
             CreateMap<UpdatePrestationDto, Prestation>();
+
+            CreateMap<UserSignUpDto, User>().ForMember(u => u.UserName, o =>  o.MapFrom(ur => ur.Email));
 
         }
     }

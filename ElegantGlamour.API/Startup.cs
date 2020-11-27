@@ -10,6 +10,9 @@ using AutoMapper;
 using AutoWrapper;
 using ElegantGlamour.API.Extensions;
 using Microsoft.Extensions.Logging;
+using ElegantGlamour.Core.Models.Entity.Auth;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace ElegantGlamour.Api
 {
@@ -35,7 +38,16 @@ namespace ElegantGlamour.Api
             services.AddDbContext<ElegantGlamourDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ElegantGlamour.Data"))
             );
-
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1d);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+            })
+                .AddEntityFrameworkStores<ElegantGlamourDbContext>()
+                .AddDefaultTokenProviders();
             services.AddApplicationServices();
 
             services.AddSwaggerServices();
