@@ -13,5 +13,7 @@ namespace ElegantGlamour.Core.Error
         public static string Err_Category_Not_Empty => "La catégorie ne peut pas être à vide";
         public static string Err_Category_Already_Exist => "La catégorie existe dejà";
         public static string Err_Category_Does_Not_Exist => "La catégorie n'existe pas";
+        public static string Err_User_Not_Exist => "L'utilisateur est introuvable";
+        public static string Err_User_Invalid_Login => "Mot de passe ou nom d'utilisateur incorrect";
     }
 }

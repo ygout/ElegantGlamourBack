@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Identity;
 using ElegantGlamour.Core.Models.Entity.Auth;
 using ElegantGlamour.Api.Dtos.User;
 using System.Linq;
+using ElegantGlamour.API.Dtos.User;
 
 namespace ElegantGlamour.Api.Controllers
 {
@@ -56,6 +57,32 @@ namespace ElegantGlamour.Api.Controllers
                 throw ex;
             }
 
+        }
+
+        [HttpPost("SignIn")]
+        public async Task<ApiResponse> SignIn(UserLoginDto userLoginResource)
+        {
+            try
+            {
+                var user = _userManager.Users.SingleOrDefault(u => u.UserName == userLoginResource.Email);
+                if (user is null)
+                {
+                    throw new ApiException(ErrorMessage.Err_User_Not_Exist, Status404NotFound);
+                }
+
+                var userSigninResult = await _userManager.CheckPasswordAsync(user, userLoginResource.Password);
+
+                if (!userSigninResult)
+                {
+                    throw new ApiException(ErrorMessage.Err_User_Invalid_Login, Status400BadRequest);
+                }
+
+                return new ApiResponse(Status200OK);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
