@@ -45,6 +45,13 @@ namespace ElegantGlamour.Data
 
                     context.SaveChanges();
                 }
+
+                if(!context.Users.Any())
+                {
+                    // context.Users.Add(new Core.Models.Entity.Auth.User(){
+                        
+                    // });
+                }
             }
             catch (Exception ex)
             {

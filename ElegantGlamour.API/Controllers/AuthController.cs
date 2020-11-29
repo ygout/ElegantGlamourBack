@@ -60,6 +60,8 @@ namespace ElegantGlamour.Api.Controllers
         }
 
         [HttpPost("SignIn")]
+        [ProducesResponseType(typeof(ResponseWrapper<GetUserDto>), Status201Created)]
+
         public async Task<ApiResponse> SignIn(UserLoginDto userLoginResource)
         {
             try
@@ -77,7 +79,8 @@ namespace ElegantGlamour.Api.Controllers
                     throw new ApiException(ErrorMessage.Err_User_Invalid_Login, Status400BadRequest);
                 }
 
-                return new ApiResponse(Status200OK);
+                var userDto = _mapper.Map<User, GetUserDto>(user);
+                return new ApiResponse(Status200OK, user);
             }
             catch (Exception ex)
             {

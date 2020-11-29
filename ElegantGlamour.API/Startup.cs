@@ -85,7 +85,11 @@ namespace ElegantGlamour.Api
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseCors(o => {
+                o.AllowAnyOrigin();
+                o.AllowAnyHeader();
+                o.AllowAnyMethod();
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
