@@ -69,7 +69,7 @@ namespace ElegantGlamour.Api.Controllers
                 var user = _userManager.Users.SingleOrDefault(u => u.UserName == userLoginResource.Email);
                 if (user is null)
                 {
-                    throw new ApiException(ErrorMessage.Err_User_Not_Exist, Status404NotFound);
+                    throw new ApiException(ErrorMessage.Err_User_Invalid_Login, Status400BadRequest);
                 }
 
                 var userSigninResult = await _userManager.CheckPasswordAsync(user, userLoginResource.Password);
