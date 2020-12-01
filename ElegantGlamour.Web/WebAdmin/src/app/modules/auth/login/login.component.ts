@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { IUser } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -37,17 +37,19 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if (this.userForm.invalid) {
+      console.error('Form invalid');
       return;
     }
-
-    this.authService
-      .login({ username: 'test', password: 'test' })
-      .subscribe({
-        next: () => {
-
-        }, error: error => {
-
-        }
-      });
+    const username = this.userForm.get('username').value as string;
+    const password = this.userForm.get('password').value as string;
+    this.authService.login({ username, password }).subscribe({
+      next: (user: IUser) => {
+        console.log('user', user);
+      },
+      error: (error: Error) => {
+        console.log('error', error);
+        throw error;
+      },
+    });
   }
 }

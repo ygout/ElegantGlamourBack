@@ -1,30 +1,15 @@
-.btn:link,
-.btn:visited {
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.btn-purple {
-  border-radius: 5em;
-  background: linear-gradient(to right, #9c27b0, #e040fb);
-  color: #fff;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  border: 0;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  font-family: "Ubuntu", sans-serif;
-  margin-left: 35%;
-  font-size: 13px;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  cursor: pointer;
-}
-
-.container {
-  font-family: "Ubuntu", sans-serif;
+:host {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-login {
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  color: #fff;
 }

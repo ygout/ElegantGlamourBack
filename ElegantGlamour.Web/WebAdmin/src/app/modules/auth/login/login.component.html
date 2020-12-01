@@ -1,31 +1,13 @@
-<div class="container">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        formControlName="username"
-        class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-      />
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Username is required</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        formControlName="password"
-        class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-      />
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">Password is required</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <a class="btn btn-purple"> Login </a>
-    </div>
-  </form>
-</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="form-container">
+    <mat-form-field>
+      <mat-label>Nom d'utilisateur</mat-label>
+      <input formControlName="username" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input type="password" formControlName="password" matInput />
+    </mat-form-field>
+    <button [disabled]="userForm.invalid" mat-button color="login">Login</button>
+  </div>
+</form>
