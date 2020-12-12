@@ -1,0 +1,9 @@
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/bin/Debug/netstandard2.0/ElegantGlamour.Core.deps.json
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/bin/Debug/netstandard2.0/ElegantGlamour.Core.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/bin/Debug/netstandard2.0/ElegantGlamour.Core.pdb
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/obj/Debug/netstandard2.0/ElegantGlamour.Core.csprojAssemblyReference.cache
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/obj/Debug/netstandard2.0/ElegantGlamour.Core.AssemblyInfoInputs.cache
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/obj/Debug/netstandard2.0/ElegantGlamour.Core.AssemblyInfo.cs
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/obj/Debug/netstandard2.0/ElegantGlamour.Core.csproj.CoreCompileInputs.cache
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/obj/Debug/netstandard2.0/ElegantGlamour.Core.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Core/obj/Debug/netstandard2.0/ElegantGlamour.Core.pdb

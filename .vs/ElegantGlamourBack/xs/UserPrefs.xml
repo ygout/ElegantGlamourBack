@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{C3708991-895A-4042-A344-BF8D8167A896}|Default">
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ElegantGlamourBack" expanded="True">
+            <Node name="ElegantGlamour.Api" expanded="True" />
+            <Node name="ElegantGlamour.Core" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
+            <Node name="ElegantGlamour.Data" expanded="True" />
+            <Node name="ElegantGlamour.Tests" expanded="True" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="ElegantGlamourBack" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.ElegantGlamour.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ElegantGlamour.Api</name>
+    </assembly>
+    <members>
+        <member name="M:ElegantGlamour.API.Controllers.PrestationsController.CreatePrestation(ElegantGlamour.Api.Dtos.AddPrestationDto)">
+            <summary>
+            Create a new prestation
+            </summary>
+            <param name="newPrestation"></param>
+            <returns>A newly prestation created</returns>
+        </member>
+    </members>
+</doc>

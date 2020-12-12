@@ -4,12 +4,17 @@
   align-items: center;
   height: 80vh;
 }
-.form-container {
+mat-card-title,
+mat-card-content {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 }
 
-.mat-login {
-  background: linear-gradient(to right, #9c27b0, #e040fb);
-  color: #fff;
+.form__button {
+  display: flex;
+  justify-content: center;
+}
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
 }

@@ -1,13 +1,24 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div class="form-container">
-    <mat-form-field>
-      <mat-label>Nom d'utilisateur</mat-label>
-      <input formControlName="username" matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Mot de passe</mat-label>
-      <input type="password" formControlName="password" matInput />
-    </mat-form-field>
-    <button [disabled]="userForm.invalid" mat-button color="login">Login</button>
-  </div>
-</form>
+<mat-card>
+  <mat-card-title> Elegant & Glamour </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <p class="form__input">
+        <mat-form-field>
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input formControlName="username" matInput />
+        </mat-form-field>
+      </p>
+      <p class="form__input">
+        <mat-form-field>
+          <mat-label>Mot de passe</mat-label>
+          <input type="password" formControlName="password" matInput />
+        </mat-form-field>
+      </p>
+      <div class="form__button">
+        <button [disabled]="userForm.invalid" mat-raised-button color="primary">
+          Login
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

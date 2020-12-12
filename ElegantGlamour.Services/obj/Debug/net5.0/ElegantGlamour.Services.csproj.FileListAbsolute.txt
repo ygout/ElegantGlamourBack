@@ -1,0 +1,15 @@
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/bin/Debug/net5.0/ElegantGlamour.Services.deps.json
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/bin/Debug/net5.0/ElegantGlamour.Services.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/bin/Debug/net5.0/ref/ElegantGlamour.Services.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/bin/Debug/net5.0/ElegantGlamour.Services.pdb
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/bin/Debug/net5.0/ElegantGlamour.Core.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/bin/Debug/net5.0/ElegantGlamour.Core.pdb
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.csprojAssemblyReference.cache
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.AssemblyInfoInputs.cache
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.AssemblyInfo.cs
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.csproj.CoreCompileInputs.cache
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.csproj.CopyComplete
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ref/ElegantGlamour.Services.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Services/obj/Debug/net5.0/ElegantGlamour.Services.pdb
