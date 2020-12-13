@@ -16,13 +16,14 @@ export class AuthService {
   currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient) {}
 
-  login(values: { username: string; password: string }): Observable<IUser> {
+  login(values: { email: string; password: string }): Observable<IUser> {
     return this.http
       .post<IApiResponse<IUser>>(this.baseUrl + 'Auth/SignIn', values)
       .pipe(
         map((userResponse: IApiResponse<IUser>) => {
           const user = userResponse.result;
           this.currentUserSource.next(user);
+          console.log('user in service', user);
           return user;
         })
       );

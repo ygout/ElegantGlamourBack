@@ -80,7 +80,8 @@ namespace ElegantGlamour.Api.Controllers
                 }
 
                 var userDto = _mapper.Map<User, GetUserDto>(user);
-                return new ApiResponse(Status200OK, user);
+
+                return new ApiResponse(String.Empty, userDto, Status200OK );
             }
             catch (Exception ex)
             {

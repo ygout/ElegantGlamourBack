@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ORl/rPm+h4MGQ1ugb2dhMIKPngX9iE0WA3f+OGSDT3KvQ7y55QYTQDnXls6C1fHG7sw909qZBeWiHdQZ/xxpxw==",
+  "dgSpecHash": "q1rsOAHdAqfbq1QsbM7cqnm4KRXqq3T3g842y6trAKrUhOQBmSjr2tOnM2xc3GL/jCt3juebCua4q/D2Tkatng==",
   "success": true,
   "projectFilePath": "/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Api/ElegantGlamour.Api.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/Users/yohann/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.0/automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
     "/Users/yohann/.nuget/packages/autowrapper.core/4.3.1/autowrapper.core.4.3.1.nupkg.sha512",
     "/Users/yohann/.nuget/packages/fluentvalidation/9.3.0/fluentvalidation.9.3.0.nupkg.sha512",
+    "/Users/yohann/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
@@ -66,6 +67,7 @@
     "/Users/yohann/.nuget/packages/microsoft.entityframeworkcore/5.0.1/microsoft.entityframeworkcore.5.0.1.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.entityframeworkcore.abstractions/5.0.1/microsoft.entityframeworkcore.abstractions.5.0.1.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.entityframeworkcore.analyzers/5.0.1/microsoft.entityframeworkcore.analyzers.5.0.1.nupkg.sha512",
+    "/Users/yohann/.nuget/packages/microsoft.entityframeworkcore.design/5.0.1/microsoft.entityframeworkcore.design.5.0.1.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.entityframeworkcore.relational/5.0.1/microsoft.entityframeworkcore.relational.5.0.1.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.entityframeworkcore.relational.design/1.1.1/microsoft.entityframeworkcore.relational.design.1.1.1.nupkg.sha512",
     "/Users/yohann/.nuget/packages/microsoft.entityframeworkcore.sqlite/5.0.1/microsoft.entityframeworkcore.sqlite.5.0.1.nupkg.sha512",

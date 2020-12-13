@@ -90,3 +90,5 @@
 /Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.API/obj/Debug/net5.0/ElegantGlamour.Api.xml
 /Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.API/obj/Debug/net5.0/ElegantGlamour.Api.pdb
 /Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.Api/obj/Debug/net5.0/ElegantGlamour.Api.genruntimeconfig.cache
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.API/bin/Debug/net5.0/Humanizer.dll
+/Users/yohann/workspace/perso/ElegantGlamourBack/ElegantGlamour.API/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Design.dll

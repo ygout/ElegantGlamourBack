@@ -1,17 +1,32 @@
 ﻿<Properties StartupConfiguration="{C3708991-895A-4042-A344-BF8D8167A896}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="ElegantGlamour.API/Controllers/AuthController.cs">
+    <Files>
+      <File FileName="ElegantGlamour.Api/Controllers/AuthController.cs" Line="84" Column="77" />
+      <File FileName="ElegantGlamour.API/Dtos/User/GetUserDto.cs" Line="7" Column="1" />
+      <File FileName="ElegantGlamour.Api/Controllers/PrestationCategoriesController.cs" Line="169" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ElegantGlamourBack" expanded="True">
-            <Node name="ElegantGlamour.Api" expanded="True" />
+            <Node name="ElegantGlamour.Api" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="AuthController.cs" selected="True" />
+              </Node>
+              <Node name="Dtos" expanded="True">
+                <Node name="User" expanded="True" />
+              </Node>
+            </Node>
             <Node name="ElegantGlamour.Core" expanded="True">
               <Node name="Dependencies" expanded="True" />
             </Node>
             <Node name="ElegantGlamour.Data" expanded="True" />
-            <Node name="ElegantGlamour.Tests" expanded="True" selected="True" />
+            <Node name="ElegantGlamour.Tests" expanded="True" />
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">

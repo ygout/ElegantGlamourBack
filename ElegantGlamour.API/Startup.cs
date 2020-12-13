@@ -36,7 +36,7 @@ namespace ElegantGlamour.Api
             });
 
             services.AddDbContext<ElegantGlamourDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ElegantGlamour.Data"))
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ElegantGlamour.Data"))
             );
             services.AddIdentity<User, Role>(options =>
             {
@@ -85,7 +85,8 @@ namespace ElegantGlamour.Api
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseCors(o => {
+            app.UseCors(o =>
+            {
                 o.AllowAnyOrigin();
                 o.AllowAnyHeader();
                 o.AllowAnyMethod();

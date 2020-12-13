@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUser } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -20,14 +15,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.userForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
+
+  ngOnInit(): void {}
 
   // convenience getter for easy access to form fields
   get f(): any {
@@ -40,9 +35,12 @@ export class LoginComponent implements OnInit {
       console.error('Form invalid');
       return;
     }
-    const username = this.userForm.get('username').value as string;
+    const email = this.userForm.get('username').value as string;
     const password = this.userForm.get('password').value as string;
-    this.authService.login({ username, password }).subscribe({
+    console.log('username ', email);
+    console.log('password ', password);
+
+    this.authService.login({ email, password }).subscribe({
       next: (user: IUser) => {
         console.log('user', user);
       },
